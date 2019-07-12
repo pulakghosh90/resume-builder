@@ -4,7 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Icon(props) {
     const { color, fontSize, className, icon, ariaHidden } = props;
-    const style = { fontSize, color, lineHeight: fontSize, verticalAlign: 'bottom' };
+    const style = {
+        fontSize,
+        color,
+        lineHeight: fontSize,
+        verticalAlign: 'middle',
+        marginRight: '10px'
+    };
     return <FontAwesomeIcon className={className} style={style} icon={icon} aria-hidden={ariaHidden} />;
 }
 

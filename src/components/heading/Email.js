@@ -3,23 +3,23 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import Icon from '../icon/Icon';
+import { getFontSize, getFontWeight, getLineHeight } from '../../theme/Theme';
 
 const StyledText = styled('span')`
-    padding-left: 5px;
+
 `;
 
 const StyledEmail = styled('div')`
-    font-size: ${(props) => props.fontSize};
-    line-height: ${(props) => props.lineHeight};
-    font-weight: ${(props) => props.fontWeight};
-    margin-bottom: 10px;
-    min-height: 15px;
+    font-size: ${({ theme }) => getFontSize(theme, 'heading', 'email')};
+    line-height: ${({ theme }) => getLineHeight(theme, 'heading', 'email')};
+    font-weight: ${({ theme }) => getFontWeight(theme, 'heading', 'email')};
+    margin-top: 10px;
 `;
 
 export default function Email(props) {
-    const { email, style } = props;
+    const { email } = props;
     return (
-        <StyledEmail style={style}>
+        <StyledEmail>
             <Icon icon={faEnvelope} />
             <StyledText>{email}</StyledText>
         </StyledEmail>
@@ -27,6 +27,5 @@ export default function Email(props) {
 }
 
 Email.propTypes = {
-    email: PropTypes.string.isRequired,
-    style: PropTypes.object
+    email: PropTypes.string.isRequired
 };

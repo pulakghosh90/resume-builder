@@ -3,21 +3,23 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { faMobileAlt } from '@fortawesome/free-solid-svg-icons';
 import Icon from '../icon/Icon';
+import { getFontSize, getFontWeight, getLineHeight } from '../../theme/Theme';
 
 const StyledPhone = styled('div')`
-    font-size: ${(props) => props.fontSize};
-    line-height: ${(props) => props.lineHeight};
-    font-weight: ${(props) => props.fontWeight};
+    font-size: ${({ theme }) => getFontSize(theme, 'heading', 'phone')};
+    line-heightheme: ${({ theme }) => getLineHeight(theme, 'heading', 'phone')};
+    font-weight: ${({ theme }) => getFontWeight(theme, 'heading', 'phone')};
+    margin-top: 10px;
 `;
 
 const StyledText = styled('span')`
-    padding-left: 5px;
+
 `;
 
 export default function Phone(props) {
-    const { phone, style } = props;
+    const { phone } = props;
     return (
-        <StyledPhone style={style}>
+        <StyledPhone>
             <Icon icon={faMobileAlt} />
             <StyledText>{phone}</StyledText>
         </StyledPhone>
@@ -25,6 +27,5 @@ export default function Phone(props) {
 }
 
 Phone.propTypes = {
-    phone: PropTypes.string.isRequired,
-    style: PropTypes.object
+    phone: PropTypes.string.isRequired
 };

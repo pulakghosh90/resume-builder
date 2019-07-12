@@ -1,36 +1,32 @@
 import React from 'react';
+import { withTheme } from 'emotion-theming';
 import Grid from '../components/layout/Grid';
 import Heading from '../components/heading/Heading';
 import Box from '../components/container/Box';
-import theme, { getBackgroundColor } from '../theme/Theme';
+import { getLayout } from '../theme/Theme';
+import Summary from '../components/summary/Summary';
 
-const Colors = {
-    essentialEcru: '#bca97e',
-    essentialEcruLight: 'rgba(188, 169, 126, 0.1)',
-    essentialEcruDark: 'rgba(188, 169, 126, 0.5)',
-    essentialEcruMedium: 'rgba(188, 169, 126, 0.2)',
-    white: '##ffffff'
-};
-
-const Layout = ({ children }) => {
-    const columns = '2fr 5fr';
-    const rows = '1fr 2fr';
+const Layout = withTheme(({ children, theme }) => {
+    const { columns, rows, viewport } = getLayout(theme);
     return (
-        <Grid columns={columns} rows={rows}>
+        <Grid columns={columns} rows={rows} height={viewport.height} width={viewport.width}>
             {children}
         </Grid>
     );
-};
+});
 
 export default function Resume(props) {
+    const { summary, heading } = props;
     return (
         <Layout>
-            <Box hAlign="left" backgroundColor={getBackgroundColor(theme, 'heading')}>
-                <Heading {...props} theme={theme} />
+            <Box section="heading" hAlign="left">
+                <Heading {...heading} />
             </Box>
-            <Box backgroundColor={getBackgroundColor(theme, 'summary')}>This is summary</Box>
-            <Box hAlign="left" backgroundColor={getBackgroundColor(theme, 'leftPanel')}>This is left side</Box>
-            <Box hAlign="left" backgroundColor={getBackgroundColor(theme, 'content')}>This is content</Box>
+            <Box section="summary">
+                <Summary {...summary} />
+            </Box>
+            <Box section="leftPanel" hAlign="left">This is left side</Box>
+            <Box section="content" hAlign="left">This is content</Box>
         </Layout>
     );
 }

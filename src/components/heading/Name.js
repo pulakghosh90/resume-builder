@@ -1,29 +1,27 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import { getFontSize, getFontWeight, getLineHeight } from '../../theme/Theme';
 
 const StyledField = styled('div')`
 `;
 
 const StyledName = styled('div')`
-    font-size: ${(props) => props.fontSize};
-    line-height: ${(props) => props.lineHeight};
-    font-weight: ${(props) => props.fontWeight};
-    padding: 0 0 28px 0;
-    letter-spacing: .5px;
-    text-transform: uppercase;
+    font-size: ${({ theme }) => getFontSize(theme, 'heading', 'name')};
+    line-height: ${({ theme }) => getLineHeight(theme, 'heading', 'name')};
+    font-weight: ${({ theme }) => getFontWeight(theme, 'heading', 'name')};
 `;
 
 export default function Name(props) {
     const {
         firstName,
         lastName,
-        style
+        showInCaps = false
     } = props;
     return (
-        <StyledName style={style}>
-            <StyledField>{firstName}</StyledField>
-            <StyledField>{lastName}</StyledField>
+        <StyledName>
+            <StyledField>{showInCaps ? firstName.toUpperCase() : firstName}</StyledField>
+            <StyledField>{showInCaps ? lastName.toUpperCase() : lastName}</StyledField>
         </StyledName>
     );
 }
@@ -31,5 +29,5 @@ export default function Name(props) {
 Name.propTypes = {
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
-    style: PropTypes.object
+    showInCaps: PropTypes.bool
 };

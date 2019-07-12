@@ -32,6 +32,8 @@ const hAlign = (props) => (props.hAlign ? `justify-items: ${ALIGN[props.hAlign]}
 const vAlign = (props) => (props.vAlign ? `align-items: ${ALIGN[props.vAlign]};` : '');
 
 const Grid = styled(DynamicElement)`
+    height:${(props) => props.height};
+    width:${(props) => props.width};
     display: grid;
     grid-template-columns: ${formatColumns};
     grid-template-rows: ${formatRows};
