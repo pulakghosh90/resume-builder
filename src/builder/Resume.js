@@ -5,6 +5,7 @@ import Heading from '../components/heading/Heading';
 import Box from '../components/container/Box';
 import { getLayout } from '../theme/Theme';
 import Summary from '../components/summary/Summary';
+import Skill from '../components/skill/Skill';
 
 const Layout = withTheme(({ children, theme }) => {
     const { columns, rows, viewport } = getLayout(theme);
@@ -16,7 +17,7 @@ const Layout = withTheme(({ children, theme }) => {
 });
 
 export default function Resume(props) {
-    const { summary, heading } = props;
+    const { summary, heading, skills } = props;
     return (
         <Layout>
             <Box section="heading" hAlign="left">
@@ -25,7 +26,9 @@ export default function Resume(props) {
             <Box section="summary">
                 <Summary {...summary} />
             </Box>
-            <Box section="leftPanel" hAlign="left">This is left side</Box>
+            <Box section="leftPanel" hAlign="left">
+                <Skill skills={skills} />
+            </Box>
             <Box section="content" hAlign="left">This is content</Box>
         </Layout>
     );
