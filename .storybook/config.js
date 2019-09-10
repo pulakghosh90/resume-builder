@@ -3,6 +3,8 @@ import { configure, addDecorator } from '@storybook/react';
 import { checkA11y } from '@storybook/addon-a11y';
 import { withOptions } from '@storybook/addon-options';
 import { ThemeProvider } from 'emotion-theming';
+import { DndProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import theme from '../src/theme/Theme';
 import GlobalStyles from '../src/util/GlobalStyles';
 
@@ -14,19 +16,15 @@ function loadStories() {
     componentStoriesReq.keys().forEach((filename) => componentStoriesReq(filename));
 }
 
-addDecorator((story) => (
-    <ThemeProvider theme={theme}>
-        {story()}
-    </ThemeProvider>
-));
+const decorator = (story) => (
+    <DndProvider backend={HTML5Backend}>
+        <ThemeProvider theme={theme}>
+            <GlobalStyles />
+            {story()}
+        </ThemeProvider>
+    </DndProvider>
+);
 
-addDecorator((story) => (
-    <div>
-        <GlobalStyles />
-        {story()}
-    </div>
-
-));
-
+addDecorator(decorator);
 addDecorator(checkA11y);
 configure(loadStories, module);
