@@ -2,10 +2,11 @@
 
 
 export const sections = [
-    { label: 'Heading', type: 'heading' },
-    { label: 'Links', type: 'link' },
-    { label: 'Professional Summary', type: 'profile_summary' },
-    { label: 'Skill', type: 'skill' },
-    { label: 'Work History', type: 'work' },
-    { label: 'Education', type: 'education' }
+    { label: 'Heading', sectionType: 'heading' },
+    { label: 'Links', sectionType: 'link' },
+    { label: 'Professional Summary', sectionType: 'profile_summary' },
+    { label: 'Skill', sectionType: 'skill' },
+    { label: 'Work History', sectionType: 'work_history' },
+    { label: 'Education', sectionType: 'education' },
+    { label: 'Interest', sectionType: 'interest' }
 ];

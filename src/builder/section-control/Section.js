@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
-
+import { connect } from 'react-redux';
 import { getSections } from '../../service.js/DataService';
 import { SectionType, ResumeCheckAction, SpellCheckAction, AddSectionAction, DownloadAction } from './Control';
+import { Actions } from '../Builder';
 
 const Container = styled('div')`
     border: dashed grey 1px;
@@ -16,7 +17,7 @@ const Group = styled('div')`
     margin: 0px 0px 16px 0px;
 `;
 
-export default class Section extends React.Component {
+class Section extends React.Component {
     constructor(props) {
         super(props);
         this.state = { sections: [] };
@@ -28,13 +29,9 @@ export default class Section extends React.Component {
         }));
     }
 
-    onClick = ({ type }) => {
-        console.log(`Clicked- ${type}`);
+    onClick = ({ sectionType }) => {
         const { dispatch } = this.props;
-        dispatch({
-            type: 'SelectSection',
-            sectionType: type
-        });
+        dispatch(Actions.SelectSection(sectionType));
     }
 
     render() {
@@ -47,7 +44,7 @@ export default class Section extends React.Component {
                 </Group>
                 <Group>
                     {
-                        sections.map((section) => <SectionType key={section.type} {...section} onClick={this.onClick} />)
+                        sections.map((section) => <SectionType key={section.sectionType} {...section} onClick={this.onClick} />)
                     }
                 </Group>
                 <Group>
@@ -58,3 +55,7 @@ export default class Section extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state) => state;
+
+export default connect(mapStateToProps)(Section);

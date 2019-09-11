@@ -41,7 +41,7 @@ module.exports = {
             minProperties: 10,
             consistent: true
         }],
-        'object-curly-spacing': ['warn', 'always', { 'objectsInObjects': false }],
+        'object-curly-spacing': ['warn', 'always', { 'objectsInObjects': true }],
         'react/jsx-filename-extension': [
             'error',
             {

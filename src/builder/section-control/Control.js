@@ -12,8 +12,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { keySwitch } from '../../util/util';
 import Icon from '../../components/icon/Icon';
+import Button from '../../components/button/Button';
 
-const getIcon = keySwitch('type', {
+const getIcon = keySwitch('sectionType', {
     education: () => <Icon icon={faBook} />,
     links: () => <Icon icon={faTv} />,
     profile_summary: () => <Icon icon={faHamburger} />,
@@ -29,38 +30,48 @@ const StyledSection = styled('div')`
 `;
 
 export const AddSectionAction = ({ onClick }) => (
-    <StyledSection onClick={() => onClick({ type: 'add_section' })}>
-        <Icon icon={faPlus} />
-        <span>Add Section</span>
+    <StyledSection>
+        <Button isBorderless appeareance="transparent" onClick={() => onClick({ sectionType: 'new_section' })}>
+            <Icon icon={faPlus} />
+            <span>Add Section</span>
+        </Button>
     </StyledSection>
 );
 
 export const DownloadAction = ({ onClick }) => (
-    <StyledSection onClick={() => onClick({ type: 'download' })}>
-        <Icon icon={faDownload} />
-        <span>Download</span>
+    <StyledSection>
+        <Button isBorderless appeareance="transparent" onClick={() => onClick({ sectionType: 'download' })}>
+            <Icon icon={faDownload} />
+            <span>Download</span>
+        </Button>
     </StyledSection>
 );
 
 export const ResumeCheckAction = ({ onClick }) => (
-    <StyledSection onClick={() => onClick({ type: 'resume_check' })}>
-        <Icon icon={faCheck} />
-        <span>Resume Check</span>
+    <StyledSection>
+        <Button isBorderless appeareance="transparent" onClick={() => onClick({ sectionType: 'resume_check' })}>
+            <Icon icon={faCheck} />
+            <span>Resume Check</span>
+        </Button>
     </StyledSection>
 );
 
 export const SpellCheckAction = ({ onClick }) => (
-    <StyledSection onClick={() => onClick({ type: 'spell_check' })}>
-        <Icon icon={faSpellCheck} />
-        <span>Spell Check</span>
+    <StyledSection>
+        <Button isBorderless appeareance="transparent" onClick={() => onClick({ sectionType: 'spell_check' })}>
+            <Icon icon={faSpellCheck} />
+            <span>Spell Check</span>
+        </Button>
     </StyledSection>
 );
 
-export const SectionType = ({ label, type, onClick }) => (
-    <StyledSection onClick={() => onClick({ type })}>
-        {
-            getIcon({ type })
-        }
-        <span>{label}</span>
+export const SectionType = ({ label, sectionType, onClick }) => (
+    <StyledSection>
+        <Button isBorderless appeareance="transparent" onClick={() => onClick({ sectionType })}>
+            {
+                getIcon({ sectionType })
+            }
+            <span>{label}</span>
+        </Button>
     </StyledSection>
 );

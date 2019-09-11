@@ -13,7 +13,7 @@ const StyledCheckbox = styled('input')`
 
 export default function CheckboxElement(props) {
     const {
-        name,
+        id,
         onChange,
         readOnly = false,
         value,
@@ -26,7 +26,7 @@ export default function CheckboxElement(props) {
                     <StyledCheckbox
                         type="checkbox"
                         checked={coerceBoolean(value)}
-                        onChange={(e) => !readOnly && onChange({ name, value: e.target.checked, e })}
+                        onChange={(e) => !readOnly && onChange({ id, value: e.target.checked, e })}
                         className={cx(className, { disabled: readOnly })}
                     />
                 )
@@ -36,7 +36,7 @@ export default function CheckboxElement(props) {
 }
 
 CheckboxElement.propTypes = {
-    name: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     onChange: PropTypes.func.isRequired,
     readOnly: PropTypes.bool,
@@ -67,14 +67,14 @@ export class CheckboxGroup extends React.Component {
         };
     }
 
-    onChange = ({ name: n, value: checked }) => {
+    onChange = ({ id: nid, value: checked }) => {
         const { value } = this.state;
-        if (checked) value.add(n);
-        else value.delete(n);
+        if (checked) value.add(nid);
+        else value.delete(nid);
         this.setState({ value });
 
-        const { name, onChange } = this.props;
-        onChange({ name, value: toArray(value) });
+        const { id, onChange } = this.props;
+        onChange({ id, value: toArray(value) });
     }
 
     render() {
@@ -106,7 +106,7 @@ export class CheckboxGroup extends React.Component {
 }
 
 CheckboxGroup.propTypes = {
-    name: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     value: PropTypes.arrayOf(PropTypes.string).isRequired,
     choices: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string,

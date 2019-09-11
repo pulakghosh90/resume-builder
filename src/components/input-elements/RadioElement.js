@@ -28,7 +28,7 @@ const StyledLabel = styled('label')`
 
 export default function RadioGroupElement(props) {
     const {
-        name,
+        id,
         onChange,
         value,
         choices = [],
@@ -47,7 +47,7 @@ export default function RadioGroupElement(props) {
                                         type="radio"
                                         value={choice.value}
                                         checked={choice.value === value}
-                                        onChange={(e) => onChange({ name, value: choice.value, e })}
+                                        onChange={(e) => onChange({ id, value: choice.value, e })}
                                         className={cx(className, { disabled: choice.readOnly })}
                                     />
                                     <StyledLabel>{choice.label}</StyledLabel>
@@ -62,7 +62,7 @@ export default function RadioGroupElement(props) {
 }
 
 RadioGroupElement.propTypes = {
-    name: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     value: PropTypes.string,
     choices: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string,

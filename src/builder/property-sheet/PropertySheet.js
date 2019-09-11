@@ -2,10 +2,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { keySwitch } from '../../util/util';
-import * as heading from './Heading.sheet';
+import { connect } from 'react-redux';
 import Form from '../../components/form/Form';
-import SheetMutation from './model-builder/SheetMutation';
 
 const Container = styled('div')`
     border: dashed grey 1px;
@@ -13,25 +11,25 @@ const Container = styled('div')`
     width: 100%;
 `;
 
-export const PropertySheetRegistry = keySwitch('sectionType', {
-    heading: () => heading
-});
-
-export default class PropertySheet extends React.Component {
+class PropertySheet extends React.Component {
     static propTypes = {
         dispatch: PropTypes.func.isRequired,
         model: PropTypes.shape({
             action: PropTypes.string,
-            fields: PropTypes.array
+            fields: PropTypes.objectOf(Map)
         }).isRequired
     }
 
     onChange = ({ id, value }) => {
         const { dispatch, model } = this.props;
-        const newModel = SheetMutation(model).setValue(id, value).save();
         dispatch({
             type: model.action,
-            propertySheet: newModel
+            id,
+            value
+        });
+        dispatch({
+            type: 'SelectPage',
+            page: 'resume'
         });
     }
 
@@ -45,3 +43,17 @@ export default class PropertySheet extends React.Component {
         );
     }
 }
+
+const Properties = (props) => {
+    const { selection, dispatch } = props;
+    return selection.fold({
+        Nothing: () => (
+            <div>
+                <h1>Please select section to update</h1>
+            </div>
+        ),
+        Just: ({ sheet }) => (<PropertySheet model={sheet} dispatch={dispatch} />)
+    });
+};
+
+export default connect(({ resume }) => ({ ...resume }))(Properties);

@@ -20,7 +20,7 @@ const StyledSelect = styled('select')`
 
 export default function SelectElement(props) {
     const {
-        name,
+        id,
         onChange,
         readOnly = false,
         value,
@@ -34,7 +34,7 @@ export default function SelectElement(props) {
                 ({ cx }) => (
                     <StyledSelect
                         value={value}
-                        onChange={(e) => onChange({ name, value: e.target.value, e })}
+                        onChange={(e) => onChange({ id, value: e.target.value, e })}
                         className={cx(className, size, { disabled: readOnly })}
                     >
                         {
@@ -48,7 +48,7 @@ export default function SelectElement(props) {
 }
 
 SelectElement.propTypes = {
-    name: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     value: PropTypes.string,
     choices: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string,

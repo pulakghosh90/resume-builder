@@ -100,6 +100,12 @@ const StyledButton = styled('button')`
         box-shadow: none;
     }
 
+    &.transparent {
+        border-color: transparent;
+        background-color: transparent;
+        box-shadow: none;
+    }
+
     &[disabled] {
         opacity: 0.4;
         cursor: not-allowed;
@@ -164,7 +170,8 @@ Button.propTypes = {
     appeareance: PropTypes.oneOf([
         'default',
         'primary',
-        'destructive'
+        'destructive',
+        'transparent'
     ]),
     size: PropTypes.oneOf([
         'xs',

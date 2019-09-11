@@ -7,6 +7,8 @@ import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import theme from '../src/theme/Theme';
 import GlobalStyles from '../src/util/GlobalStyles';
+import { Provider } from 'react-redux';
+import create from '../src/store/AppStore';
 
 withOptions({ addonPanelInRight: true });
 
@@ -17,12 +19,14 @@ function loadStories() {
 }
 
 const decorator = (story) => (
-    <DndProvider backend={HTML5Backend}>
-        <ThemeProvider theme={theme}>
-            <GlobalStyles />
-            {story()}
-        </ThemeProvider>
-    </DndProvider>
+    <Provider store={create()}>
+        <DndProvider backend={HTML5Backend}>
+            <ThemeProvider theme={theme}>
+                <GlobalStyles />
+                {story()}
+            </ThemeProvider>
+        </DndProvider>
+    </Provider>
 );
 
 addDecorator(decorator);

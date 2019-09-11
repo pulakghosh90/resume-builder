@@ -4,8 +4,10 @@ export default function SheetMutation(sheet = {}) {
     const newSheet = FormModelBuilder(sheet).build();
     return {
         setFieldProps(id, props, value) {
-            const field = newSheet.fields.get(id);
-            field[props] = value;
+            const { fields } = newSheet;
+            const newField = Object.assign({}, fields.get(id));
+            newField[props] = value;
+            fields.set(id, newField);
             return this;
         },
         setValue(id, value) {

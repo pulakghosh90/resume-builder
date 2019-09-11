@@ -1,8 +1,9 @@
 import FormModelBuilder from './model-builder/FormModelBuilder';
+import SheetMutation from './model-builder/SheetMutation';
 
 const getFieldDefs = () => ([
     {
-        id: 'first_name',
+        id: 'heading.first_name',
         label: 'First Name',
         controlType: 'String',
         value: '',
@@ -12,7 +13,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'last_name',
+        id: 'heading.last_name',
         label: 'Last Name',
         controlType: 'String',
         value: '',
@@ -22,7 +23,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'address',
+        id: 'heading.address',
         label: 'Address',
         controlType: 'String',
         value: '',
@@ -32,7 +33,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'city',
+        id: 'heading.city',
         label: 'City',
         controlType: 'String',
         value: '',
@@ -42,7 +43,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'state',
+        id: 'heading.state',
         label: 'State/Province',
         controlType: 'String',
         value: '',
@@ -52,7 +53,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'pin_code',
+        id: 'heading.pin_code',
         label: 'Zip Code',
         controlType: 'Number',
         value: '',
@@ -62,19 +63,33 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'country',
+        id: 'heading.country',
         label: 'Country',
         controlType: 'Choice',
         value: '',
         visibility: true,
         readOnly: false,
         required: true,
-        errors: []
+        errors: [],
+        choices: [
+            {
+                label: 'India',
+                value: 'india'
+            },
+            {
+                label: 'US',
+                value: 'us'
+            },
+            {
+                label: 'Germany',
+                value: 'germany'
+            }
+        ]
     },
     {
-        id: 'phone',
+        id: 'heading.phone',
         label: 'Phone',
-        controlType: 'Number',
+        controlType: 'String',
         value: '',
         visibility: true,
         readOnly: false,
@@ -82,7 +97,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'email',
+        id: 'heading.email',
         label: 'Email',
         controlType: 'String',
         value: '',
@@ -98,10 +113,13 @@ export const sheet = FormModelBuilder()
     .fields(getFieldDefs())
     .build();
 
-export const onUpdate = () => {
-
+// perform sheet updation and validation
+export const onUpdate = ({ id, value }, prevSheet, state) => {
+    const nextSheet = SheetMutation(prevSheet).setValue(id, value).save();
+    const selection = state.selection.map((v) => ({ ...v, sheet: nextSheet }));
+    return { selection };
 };
 
-export const onLoad = () => {
-
+export const onLoad = (sheet, state) => {
+    return sheet;
 };
