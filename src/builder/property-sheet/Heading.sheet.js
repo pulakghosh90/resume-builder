@@ -55,7 +55,7 @@ const getFieldDefs = () => ([
     {
         id: 'heading.pin_code',
         label: 'Zip Code',
-        controlType: 'Number',
+        controlType: 'String',
         value: '',
         visibility: true,
         readOnly: false,
@@ -110,6 +110,8 @@ const getFieldDefs = () => ([
 
 export const sheet = FormModelBuilder()
     .action('UpdateProperty')
+    .heading('heading.heading', 'Resume Heading')
+    .sectionHeader('heading.sub-heading', 'We suggest including an email and phone number.')
     .fields(getFieldDefs())
     .build();
 

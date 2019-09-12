@@ -17,7 +17,7 @@ export default function SheetMutation(sheet = {}) {
             return this.setFieldProps(id, 'errors', errors);
         },
         setVisibility(id, visibility) {
-            return this.setFieldProps(id, 'visible', visibility);
+            return this.setFieldProps(id, 'visibility', visibility);
         },
         setRequired(id, required) {
             return this.setFieldProps(id, 'required', required);

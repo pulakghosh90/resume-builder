@@ -47,8 +47,12 @@ export default function FormModelBuilder(opts = {}) {
             }, model.fields);
             return this;
         },
-        sectionHeader({ id, title, visible = true }) {
-            model.fields.set(id, { section: true, id, title, visible });
+        heading(id, title) {
+            model.fields.set(id, { heading: true, id, title, visibility: true });
+            return this;
+        },
+        sectionHeader(id, title) {
+            model.fields.set(id, { section: true, id, title, visibility: true });
             return this;
         },
         build() {

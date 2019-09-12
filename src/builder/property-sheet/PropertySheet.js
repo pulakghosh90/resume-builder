@@ -37,7 +37,6 @@ class PropertySheet extends React.Component {
         const { model } = this.props;
         return (
             <Container>
-                This is PropertySheet
                 <Form model={model} onChange={this.onChange} />
             </Container>
         );

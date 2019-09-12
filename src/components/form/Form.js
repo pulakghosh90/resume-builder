@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
@@ -55,10 +56,25 @@ const FormControl = ({ field, onChange }) => {
 };
 
 const SectionContainer = styled('div')`
+    color: #666;
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: 400;
+    margin-bottom: 5px;
 `;
 
-const Section = ({ title, visible }) => (visible ? <SectionContainer>{title}</SectionContainer> : null);
+const HeadingContainer = styled('div')`
+    font-size: 26px;
+    color: #277fd9;
+    line-height: 1.5;
+    margin-bottom: 5px;
+    font-weight: 300;
+`;
+
+const Section = ({ title, visibility }) => (visibility ? <SectionContainer>{title}</SectionContainer> : null);
+const Heading = ({ title, visibility }) => (visibility ? <HeadingContainer>{title}</HeadingContainer> : null);
 const isSection = ({ section }) => section === true;
+const isHeading = ({ heading }) => heading === true;
 const preventSubmit = (e) => e.preventDefault();
 
 export default function Form({ model, onChange }) {
@@ -66,13 +82,15 @@ export default function Form({ model, onChange }) {
     return (
         <form onSubmit={preventSubmit}>
             {
-                fields.map((field) => (isSection(field)
-                    ? <Section key={field.id} {...field} />
-                    : (
-                        <FormControlContainer key={field.id}>
-                            <FormControl field={field} onChange={onChange} />
-                        </FormControlContainer>
-                    )
+                fields.map((field) => (
+                    isHeading(field) ? <Heading key={field.id} {...field} />
+                        : isSection(field)
+                            ? <Section key={field.id} {...field} />
+                            : (
+                                <FormControlContainer key={field.id}>
+                                    <FormControl field={field} onChange={onChange} />
+                                </FormControlContainer>
+                            )
                 ))
             }
         </form>
