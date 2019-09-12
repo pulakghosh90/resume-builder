@@ -36,3 +36,9 @@ export const lookupUnsafe = (prop, obj) => {
     if (val.isJust) return val.getOrElse();
     return val;
 };
+
+export const replace = (key, value, kollect) => {
+    const copy = Object.assign({}, kollect);
+    copy[key] = value;
+    return copy;
+};

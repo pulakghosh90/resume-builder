@@ -1,5 +1,6 @@
 import FormModelBuilder from './model-builder/FormModelBuilder';
 import SheetMutation from './model-builder/SheetMutation';
+import { replace } from '../util/util';
 
 const getFieldDefs = () => ([
     {
@@ -119,7 +120,7 @@ export const sheet = FormModelBuilder()
 export const onUpdate = ({ id, value }, prevSheet, state) => {
     const nextSheet = SheetMutation(prevSheet).setValue(id, value).save();
     const selection = state.selection.map((v) => ({ ...v, sheet: nextSheet }));
-    return { selection };
+    return replace('selection', selection, state);
 };
 
 export const onLoad = (sheet, state) => {
