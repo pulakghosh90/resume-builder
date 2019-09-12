@@ -3,7 +3,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Form from '../../components/form/Form';
+import Form from '../components/form/Form';
 
 const Container = styled('div')`
     border: dashed grey 1px;
@@ -27,10 +27,6 @@ class PropertySheet extends React.Component {
             id,
             value
         });
-        dispatch({
-            type: 'SelectPage',
-            page: 'resume'
-        });
     }
 
     render() {
@@ -43,8 +39,8 @@ class PropertySheet extends React.Component {
     }
 }
 
-const Properties = (props) => {
-    const { selection, dispatch } = props;
+const Properties = ({ builder, dispatch }) => {
+    const { selection } = builder;
     return selection.fold({
         Nothing: () => (
             <div>
@@ -55,4 +51,4 @@ const Properties = (props) => {
     });
 };
 
-export default connect(({ resume }) => ({ ...resume }))(Properties);
+export default connect((state) => (state))(Properties);

@@ -1,10 +1,11 @@
 import { set } from 'lodash';
 import { matchAction, lookupUnsafe } from '../util/util';
-import lookUpModel from './property-sheet/PropertySheetRegistry';
+import lookUpModel from '../property-sheet/PropertySheetRegistry';
 import { Nothing, Just } from '../util/Maybe';
 
 export const init = () => ({
-    selection: Nothing()
+    selection: Nothing(),
+    resume: {}
 });
 
 export const Actions = {

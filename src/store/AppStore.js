@@ -1,15 +1,12 @@
 import { createStore, compose, combineReducers } from 'redux';
-import * as Builder from '../builder/Resume';
-import * as Resume from '../builder/Builder';
+import * as Builder from '../builder/Builder';
 
 export default function create() {
     const initialState = {
-        builder: Builder.init(),
-        resume: Resume.init()
+        builder: Builder.init()
     };
     const rootReducer = combineReducers({
-        builder: Builder.update,
-        resume: Resume.update
+        builder: Builder.update
     });
 
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

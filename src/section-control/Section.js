@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { connect } from 'react-redux';
-import { getSections } from '../../service/DataService';
+import { getSections } from '../service/DataService';
 import { SectionType, ResumeCheckAction, SpellCheckAction, AddSectionAction, DownloadAction } from './Control';
-import { Actions } from '../Builder';
+import { Actions } from '../builder/Builder';
 
 const Container = styled('div')`
     border: dashed grey 1px;

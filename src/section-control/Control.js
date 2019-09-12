@@ -10,9 +10,9 @@ import {
     faCheck,
     faSpellCheck
 } from '@fortawesome/free-solid-svg-icons';
-import { keySwitch } from '../../util/util';
-import Icon from '../../components/icon/Icon';
-import Button from '../../components/button/Button';
+import { keySwitch } from '../util/util';
+import Icon from '../components/icon/Icon';
+import Button from '../components/button/Button';
 
 const getIcon = keySwitch('sectionType', {
     education: () => <Icon icon={faBook} />,
