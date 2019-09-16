@@ -83,7 +83,6 @@ export const Horse = () => {
     const [{ opacity, color }, drag] = useDrag({
         item: { type: Type.Draggable },
         collect: (monitor) => {
-            debugger
             return ({
                 opacity: monitor.isDragging() ? 0.5 : 1,
                 color: monitor.isDragging() ? 'red' : 'black',

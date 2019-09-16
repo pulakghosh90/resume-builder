@@ -1,10 +1,5 @@
-import { sections } from './MockData';
+import { sections, resume } from './MockData';
 
-/* eslint-disable import/prefer-default-export */
+export const getSections = () => Promise.resolve(sections);
 
-
-export const getSections = () => (
-    new Promise((resolve, reject) => {
-        resolve(sections);
-    })
-);
+export const fetchResume = (id) => Promise.resolve(resume);

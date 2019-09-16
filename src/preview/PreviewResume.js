@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { connect } from 'react-redux';
+import Loading from '../components/icon/Loading';
+import { If } from '../components/If';
 
 const Container = styled('div')`
     border: dashed grey 1px;
@@ -7,13 +10,26 @@ const Container = styled('div')`
     width: 100%;
 `;
 
-export default class Preview extends React.Component {
-
+class Preview extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {};
     }
 
     render() {
-        return <Container>This is Preview</Container>
+        const { builder } = this.props;
+        const { loading } = builder;
+        return (
+            <Container>
+                <If test={loading}>
+                    <Loading />
+                </If>
+                <If test={!loading}>
+                    This is Preview
+                </If>
+            </Container>
+        );
     }
 }
+
+export default connect((state) => state)(Preview);

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { connect } from 'react-redux';
 import { getSections } from '../service/DataService';
 import { SectionType, ResumeCheckAction, SpellCheckAction, AddSectionAction, DownloadAction } from './Control';
-import { Actions } from '../builder/Builder';
+import { Action } from '../builder/Builder';
 
 const Container = styled('div')`
     border: dashed grey 1px;
@@ -31,7 +31,7 @@ class Section extends React.Component {
 
     onClick = ({ sectionType }) => {
         const { dispatch } = this.props;
-        dispatch(Actions.SelectSection(sectionType));
+        dispatch(Action.SelectSection(sectionType));
     }
 
     render() {

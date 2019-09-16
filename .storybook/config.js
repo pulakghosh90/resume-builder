@@ -29,6 +29,6 @@ const decorator = (story) => (
     </Provider>
 );
 
-addDecorator(decorator);
+// addDecorator(decorator);
 addDecorator(checkA11y);
 configure(loadStories, module);

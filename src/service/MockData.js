@@ -10,3 +10,13 @@ export const sections = [
     { label: 'Education', sectionType: 'education' },
     { label: 'Interest', sectionType: 'interest' }
 ];
+
+
+export const resume = [
+    {
+        id: 'abc',
+        userid: 'pulak',
+        sections,
+        template: 'default'
+    }
+];

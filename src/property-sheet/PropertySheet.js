@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Form from '../components/form/Form';
+import { Action } from '../builder/Builder';
 
 const Container = styled('div')`
     border: dashed grey 1px;
