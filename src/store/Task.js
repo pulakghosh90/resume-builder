@@ -2,7 +2,7 @@
 
 const createAsyncScheduler = () => (fn) => setTimeout(fn, 0);
 
-class Scheduler {
+class AsyncHandler {
     constructor(dispatch) {
         this.dispatch = dispatch;
         this.queue = [];
@@ -59,8 +59,8 @@ const unwrapPromise = (result, prevState, enqueue) => {
 };
 
 export default function createTaskMiddleware() {
-    let scheduler;
-    const enqueue = (t) => scheduler.add(t);
+    let asyncHandler;
+    const enqueue = (t) => asyncHandler.add(t);
 
     // this will ensure you can return promise from a reducer.
     // unwrapPromise enqueue those promises and coninue the flow after the promise
@@ -77,7 +77,7 @@ export default function createTaskMiddleware() {
     }
 
     const middleware = ({ dispatch, getState }) => {
-        scheduler = new Scheduler(dispatch);
+        asyncHandler = new AsyncHandler(dispatch);
         return (next) => (action) => {
             if (isPromise(action)) {
                 enqueue(action);

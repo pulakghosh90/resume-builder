@@ -31,6 +31,21 @@ export const Action = {
             type: 'LoadResume',
             resume
         };
+    },
+    ResumeCheck() {
+        return {
+            type: 'ResumeCheck'
+        };
+    },
+    SpellCheck() {
+        return {
+            type: 'SpellCheck'
+        };
+    },
+    Download() {
+        return {
+            type: 'Download'
+        };
     }
 };
 
@@ -44,7 +59,7 @@ export const update = matchAction({
         });
         if (match) {
             if (match.params.id !== state.resume.id) {
-                return Promise.resolve(Action.FetchResume(match.params.id));
+                return Promise.resolve(Action.FetchResume('abc'));
             }
             return state;
         }
@@ -64,7 +79,7 @@ export const update = matchAction({
             sheet: model.onLoad(model.sheet, state)
         });
 
-        const newState = Object.assign({}, state, { loading: false });
+        const newState = Object.assign({}, state);
         set(newState, 'selection', selection);
         return newState;
     },
@@ -75,13 +90,13 @@ export const update = matchAction({
         // TO DO: persist value in state
         return newState;
     },
-    REQUEST_START(state, action) {
-        return { ...state, loading: true };
+    ResumeCheck(state, action) {
+        return state;
     },
-    REQUEST_SUCCESSFUL(state, action) {
-        return { ...state, loading: false };
+    SpellCheck(state, action) {
+        return state;
     },
-    REQUEST_FAILED(state, action) {
+    Download(state, action) {
         return state;
     }
 });

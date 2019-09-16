@@ -1,14 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { connect } from 'react-redux';
-import { getSections } from '../service/DataService';
 import { SectionType, ResumeCheckAction, SpellCheckAction, AddSectionAction, DownloadAction } from './Control';
 import { Action } from '../builder/Builder';
 
 const Container = styled('div')`
-    border: dashed grey 1px;
     height: 100%;
     width: 100%;
+    padding-left: 10px;
 `;
 
 const Group = styled('div')`
@@ -18,29 +16,18 @@ const Group = styled('div')`
 `;
 
 class Section extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { sections: [] };
-    }
-
-    componentDidMount() {
-        getSections().then((data) => this.setState({
-            sections: data
-        }));
-    }
-
     onClick = ({ sectionType }) => {
         const { dispatch } = this.props;
         dispatch(Action.SelectSection(sectionType));
     }
 
     render() {
-        const { sections } = this.state;
+        const { sections = [], dispatch } = this.props;
         return (
             <Container>
                 <Group>
-                    <ResumeCheckAction onClick={this.onClick} />
-                    <SpellCheckAction onClick={this.onClick} />
+                    <ResumeCheckAction onClick={() => dispatch(Action.ResumeCheck())} />
+                    <SpellCheckAction onClick={() => dispatch(Action.SpellCheck())} />
                 </Group>
                 <Group>
                     {
@@ -50,12 +37,10 @@ class Section extends React.Component {
                 <Group>
                     <AddSectionAction onClick={this.onClick} />
                 </Group>
-                <DownloadAction onClick={this.onClick} />
+                <DownloadAction onClick={() => dispatch(Action.Download())} />
             </Container>
         );
     }
 }
 
-const mapStateToProps = (state) => state;
-
-export default connect(mapStateToProps)(Section);
+export default Section;

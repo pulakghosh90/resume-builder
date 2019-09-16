@@ -2,12 +2,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Form from '../components/form/Form';
-import { Action } from '../builder/Builder';
 
 const Container = styled('div')`
-    border: dashed grey 1px;
     height: 100%;
     width: 100%;
 `;
@@ -40,16 +37,15 @@ class PropertySheet extends React.Component {
     }
 }
 
-const Properties = ({ builder, dispatch }) => {
-    const { selection } = builder;
-    return selection.fold({
+const Properties = ({ selection, dispatch }) => (
+    selection.fold({
         Nothing: () => (
             <div>
                 <h1>Please select section to update</h1>
             </div>
         ),
         Just: ({ sheet }) => (<PropertySheet model={sheet} dispatch={dispatch} />)
-    });
-};
+    })
+);
 
-export default connect((state) => (state))(Properties);
+export default Properties;
