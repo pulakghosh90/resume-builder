@@ -1,9 +1,10 @@
+import { get } from 'lodash';
 import FormModelBuilder from './model-builder/FormModelBuilder';
 import SheetMutation from './model-builder/SheetMutation';
 
 const getFieldDefs = () => ([
     {
-        id: 'profile_summary.summary',
+        id: 'summary',
         label: 'Professional Summary',
         controlType: 'String',
         value: '',
@@ -25,6 +26,8 @@ export const onUpdate = ({ id, value }, prevSheet, state) => {
     return { selection };
 };
 
-export const onLoad = (sheet) => {
-    return sheet;
+export const onLoad = (sheet_, state, sectionType) => {
+    const sectionPath = ['resume', 'sections', sectionType];
+    const section = get(state, sectionPath);
+    return SheetMutation(sheet_).loadValues(section).save();
 };

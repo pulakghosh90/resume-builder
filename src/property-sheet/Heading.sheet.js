@@ -1,10 +1,11 @@
+import { get } from 'lodash';
 import FormModelBuilder from './model-builder/FormModelBuilder';
 import SheetMutation from './model-builder/SheetMutation';
 import { replace } from '../util/util';
 
 const getFieldDefs = () => ([
     {
-        id: 'heading.first_name',
+        id: 'firstName',
         label: 'First Name',
         controlType: 'String',
         value: '',
@@ -14,7 +15,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'heading.last_name',
+        id: 'lastName',
         label: 'Last Name',
         controlType: 'String',
         value: '',
@@ -24,7 +25,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'heading.address',
+        id: 'address',
         label: 'Address',
         controlType: 'String',
         value: '',
@@ -34,7 +35,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'heading.city',
+        id: 'city',
         label: 'City',
         controlType: 'String',
         value: '',
@@ -44,7 +45,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'heading.state',
+        id: 'state',
         label: 'State/Province',
         controlType: 'String',
         value: '',
@@ -54,7 +55,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'heading.pin_code',
+        id: 'pin',
         label: 'Zip Code',
         controlType: 'String',
         value: '',
@@ -64,7 +65,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'heading.country',
+        id: 'country',
         label: 'Country',
         controlType: 'Choice',
         value: '',
@@ -88,7 +89,7 @@ const getFieldDefs = () => ([
         ]
     },
     {
-        id: 'heading.phone',
+        id: 'phone',
         label: 'Phone',
         controlType: 'String',
         value: '',
@@ -98,7 +99,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'heading.email',
+        id: 'email',
         label: 'Email',
         controlType: 'String',
         value: '',
@@ -111,8 +112,8 @@ const getFieldDefs = () => ([
 
 export const sheet = FormModelBuilder()
     .action('UpdateProperty')
-    .heading('heading.heading', 'Resume Heading')
-    .sectionHeader('heading.sub-heading', 'We suggest including an email and phone number.')
+    .heading('heading', 'Resume Heading')
+    .sectionHeader('sub-heading', 'We suggest including an email and phone number.')
     .fields(getFieldDefs())
     .build();
 
@@ -123,6 +124,8 @@ export const onUpdate = ({ id, value }, prevSheet, state) => {
     return replace('selection', selection, state);
 };
 
-export const onLoad = (sheet, state) => {
-    return sheet;
+export const onLoad = (sheet_, state, sectionType) => {
+    const sectionPath = ['resume', 'sections', sectionType];
+    const section = get(state, sectionPath);
+    return SheetMutation(sheet_).loadValues(section).save();
 };

@@ -2,20 +2,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { faAsterisk } from '@fortawesome/free-solid-svg-icons'
 import StringElement from '../input-elements/StringElement';
 import FlexContainer from '../layout/Container';
 import CheckboxElement from '../input-elements/CheckboxElement';
 import RadioGroupElement from '../input-elements/RadioElement';
 import SelectElement from '../input-elements/SelectElement';
+import Icon from '../icon/Icon';
 
 const ControlComponents = {
     String: StringElement,
     Checkbox: CheckboxElement,
     Raddio: RadioGroupElement,
-    Choice: SelectElement
+    Choice: SelectElement,
+    // TO DO: implement specific control
+    Date: StringElement
 };
 
-const Label = styled('label')`
+const StyledLabel = styled('label')`
     flex-grow: 1;
     flex-basis: auto;
     width: 10%;
@@ -39,14 +43,27 @@ const ControlContainer = styled('div')`
     margin: 0 15px;
 `;
 
+const RequiredMarker = ({ hasValue }) => {
+    const color = hasValue ? '#666666' : '#C83C36';
+    return <Icon icon={faAsterisk} color={color} fontSize="8px" />;
+};
+
+const Label = ({ hasValue, text, required }) => (
+    <StyledLabel>
+        {required && <RequiredMarker hasValue={hasValue} />}
+        <span>{text}</span>
+    </StyledLabel>
+);
+
 const FormControl = ({ field, onChange }) => {
     if (!field.visibility) return null;
 
     const Control = ControlComponents[field.controlType];
     const hasError = field.errors.length > 0;
+    const hasValue = !!field.value;
     return (
         <ControlContainer>
-            <Label>{field.label}</Label>
+            <Label hasValue={hasValue} text={field.label} required={field.required} />
             {Control && <Control {...field} onChange={onChange} />}
             {
                 hasError && field.errors.map((err) => (<FieldError key={err}>{err}</FieldError>))

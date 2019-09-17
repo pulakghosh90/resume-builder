@@ -1,7 +1,7 @@
-import { set } from 'lodash';
+import { set, get } from 'lodash';
 import { matchPath } from 'react-router';
 import { LOCATION_CHANGE } from 'connected-react-router';
-import { matchAction, lookupUnsafe } from '../util/util';
+import { matchAction, lookupUnsafe, getValues } from '../util/util';
 import lookUpModel from '../property-sheet/PropertySheetRegistry';
 import { Nothing, Just } from '../util/Maybe';
 import { fetchResume } from '../service/DataService';
@@ -76,7 +76,7 @@ export const update = matchAction({
         const selection = Just({
             sectionType,
             model,
-            sheet: model.onLoad(model.sheet, state)
+            sheet: model.onLoad(model.sheet, state, sectionType)
         });
 
         const newState = Object.assign({}, state);
@@ -85,9 +85,14 @@ export const update = matchAction({
     },
     UpdateProperty(state, action) {
         const selection = lookupUnsafe('selection', state);
-        const { sheet: prevSheet, model } = selection;
+        const { sheet: prevSheet, model, sectionType } = selection;
         const newState = model.onUpdate(action, prevSheet, state);
-        // TO DO: persist value in state
+        // TO DO: new function for this task
+        const sectionPath = ['resume', 'sections', sectionType];
+        const oldValues = get(state, sectionPath);
+        const { sheet: newSheet } = lookupUnsafe('selection', newState);
+        const newValues = getValues(newSheet);
+        set(newState, sectionPath, Object.assign({}, oldValues, newValues));
         return newState;
     },
     ResumeCheck(state, action) {

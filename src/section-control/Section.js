@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { SectionType, ResumeCheckAction, SpellCheckAction, AddSectionAction, DownloadAction } from './Control';
 import { Action } from '../builder/Builder';
+import { reduceObject } from '../util/util';
 
 const Container = styled('div')`
     height: 100%;
@@ -22,7 +23,7 @@ class Section extends React.Component {
     }
 
     render() {
-        const { sections = [], dispatch } = this.props;
+        const { sections = {}, dispatch } = this.props;
         return (
             <Container>
                 <Group>
@@ -31,7 +32,14 @@ class Section extends React.Component {
                 </Group>
                 <Group>
                     {
-                        sections.map((section) => <SectionType key={section.sectionType} {...section} onClick={this.onClick} />)
+                        reduceObject(
+                            (acc, key, section) => {
+                                acc.push(<SectionType key={key} {...section} onClick={this.onClick} />);
+                                return acc;
+                            },
+                            [],
+                            sections
+                        )
                     }
                 </Group>
                 <Group>

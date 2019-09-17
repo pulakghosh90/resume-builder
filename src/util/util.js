@@ -42,3 +42,44 @@ export const replace = (key, value, kollect) => {
     copy[key] = value;
     return copy;
 };
+
+export const mapObject = (f, obj) => {
+    const copy = {};
+    for (const k in obj) {
+        copy[k] = f(k, obj[k]);
+    }
+    return copy;
+};
+
+export const reduceObject = (f, seed, obj) => {
+    for (const k in obj) {
+        seed = f(seed, k, obj[k]);
+    }
+    return seed;
+};
+
+export const reduce = {
+    Object(f, seed, obj) {
+        for (const key in obj) {
+            seed = f(seed, key, obj[key]);
+        }
+        return seed;
+    },
+    Array(f, seed, list) {
+        for (let i = 0; i < list.length; i++) {
+            seed = f(seed, i, list[i]);
+        }
+        return seed;
+    }
+};
+
+export const getValues = (sheet) => {
+    const fields = Array.from(sheet.fields.values());
+    return fields.reduce((seed, field) => {
+        if (field.heading || field.section) {
+            return seed;
+        }
+        seed[field.id] = field.value;
+        return seed;
+    }, {});
+};

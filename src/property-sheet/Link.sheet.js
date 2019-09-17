@@ -1,9 +1,10 @@
+import { get } from 'lodash';
 import FormModelBuilder from './model-builder/FormModelBuilder';
 import SheetMutation from './model-builder/SheetMutation';
 
 const getFieldDefs = () => ([
     {
-        id: 'link.linkedin',
+        id: 'linkedin',
         label: 'LinkedIn Profile',
         controlType: 'String',
         value: '',
@@ -13,7 +14,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'link.github',
+        id: 'github',
         label: 'GitHub Profile',
         controlType: 'String',
         value: '',
@@ -23,7 +24,7 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'link.personal',
+        id: 'personal',
         label: 'Personal Website',
         controlType: 'String',
         value: '',
@@ -45,6 +46,8 @@ export const onUpdate = ({ id, value }, prevSheet, state) => {
     return { selection };
 };
 
-export const onLoad = (sheet) => {
-    return sheet;
+export const onLoad = (sheet_, state, sectionType) => {
+    const sectionPath = ['resume', 'sections', sectionType];
+    const section = get(state, sectionPath);
+    return SheetMutation(sheet_).loadValues(section).save();
 };
