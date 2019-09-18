@@ -57,6 +57,7 @@ export const update = matchAction({
             exact: true,
             strict: false
         });
+        // TO DO: get the id from route
         if (match) {
             if (match.params.id !== state.resume.id) {
                 return Promise.resolve(Action.FetchResume('abc'));

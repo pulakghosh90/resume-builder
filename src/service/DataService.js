@@ -1,5 +1,7 @@
 import { sections, resume } from './MockData';
 
+
+// TO DO: implement proper service
 export const getSections = () => Promise.resolve(sections);
 
 export const fetchResume = (rid) => (

@@ -37,6 +37,7 @@ export const lookupUnsafe = (prop, obj) => {
     return val;
 };
 
+// TO DO: explore immutable.js for functional programming
 export const replace = (key, value, kollect) => {
     const copy = Object.assign({}, kollect);
     copy[key] = value;
