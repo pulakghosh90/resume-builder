@@ -15,7 +15,7 @@ import Button from '../components/button/Button';
 const getIcon = keySwitch('sectionType', {
     education: () => <Icon icon={faBook} />,
     links: () => <Icon icon={faTv} />,
-    profile_summary: () => <Icon icon={faHamburger} />,
+    profileSummary: () => <Icon icon={faHamburger} />,
     _: () => <Icon icon={faEdit} />
 });
 

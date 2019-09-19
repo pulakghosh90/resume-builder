@@ -4,6 +4,7 @@ import { sections, resume } from './MockData';
 const delay = (ms) => (fn, args) => setTimeout(fn, ms, args);
 
 const delay1s = delay(1000);
+const delay0s = delay(0);
 
 // TO DO: implement proper service
 export const getSections = () => Promise.resolve(sections);
@@ -11,7 +12,7 @@ export const getSections = () => Promise.resolve(sections);
 export const fetchResume = (rid) => (
     new Promise((resolve) => {
         const args = resume.filter(({ id }) => id === rid)[0];
-        delay1s(resolve, args);
+        delay0s(resolve, args);
     })
 );
 

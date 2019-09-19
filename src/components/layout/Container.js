@@ -2,22 +2,22 @@ import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
-function DynamicElement({ as, direction, reverse, wrap, ...props }) {
+function DynamicElement({ as, direction, reverse, wrap, color, ...props }) {
     const Tag = as || 'div';
     return (<Tag {...props} />);
 }
 
 const ALIGN = {
     top: 'flex-start',
-    right: 'flex-start',
+    right: 'flex-end',
     bottom: 'flex-end',
-    left: 'flex-end',
+    left: 'flex-start',
     center: 'center',
     middle: 'center'
 };
 
 const addVAAlign = ({ direction, valign }) => (
-    valign && (`${direction !== 'horizontal' ? 'align-items' : 'justify-content'} : ${ALIGN[valign]}`)
+    valign && (`${direction === 'horizontal' ? 'align-items' : 'justify-content'} : ${ALIGN[valign]}`)
 );
 
 const addHAAlign = ({ direction, halign }) => (
@@ -35,6 +35,7 @@ const FlexContainer = styled(DynamicElement)`
     flex-wrap: ${({ wrap }) => (wrap ? 'wrap' : 'nowrap')};
     ${addHAAlign};
     ${addVAAlign};
+    ${({ background }) => (`background-color: ${background};`)}
 `;
 
 FlexContainer.propTypes = {
@@ -42,7 +43,8 @@ FlexContainer.propTypes = {
     reverse: PropTypes.bool,
     wrap: PropTypes.bool,
     halign: PropTypes.oneOf(['left', 'right', 'center', null]),
-    valign: PropTypes.oneOf(['top', 'bottom', 'middle', null])
+    valign: PropTypes.oneOf(['top', 'bottom', 'middle', null]),
+    color: PropTypes.string
 };
 
 FlexContainer.defaultProps = {
@@ -50,7 +52,8 @@ FlexContainer.defaultProps = {
     reverse: false,
     wrap: false,
     halign: 'center',
-    valign: 'middle'
+    valign: 'middle',
+    background: '#ffffff'
 };
 
 export default FlexContainer;

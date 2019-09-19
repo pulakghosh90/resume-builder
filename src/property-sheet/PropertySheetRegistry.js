@@ -18,9 +18,9 @@ const SheetRegistry = {
     interest: Interest,
     language: Language,
     link: Link,
-    profile_summary: ProfileSummary,
+    profileSummary: ProfileSummary,
     skill: Skill,
-    work_history: WorkHistory,
+    workHistory: WorkHistory,
     new_section: NewSection
 };
 
