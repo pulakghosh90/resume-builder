@@ -22,6 +22,9 @@ function switchOnKey(state, action) {
     if (typeof actionMap[type] === 'function') {
         return actionMap[type](state, action);
     }
+    if (typeof actionMap['*'] === 'function') {
+        return actionMap['*'](state, action);
+    }
     return state;
 }
 

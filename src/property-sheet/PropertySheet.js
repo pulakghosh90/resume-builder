@@ -5,6 +5,14 @@ import PropTypes from 'prop-types';
 import Form from '../components/form/Form';
 
 const Container = styled('div')`
+    grid-area: rt;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+`;
+
+const NoSelection = styled('div')`
+    grid-area: rt;
     height: 100%;
     width: 100%;
 `;
@@ -40,9 +48,9 @@ class PropertySheet extends React.Component {
 const Properties = ({ selection, dispatch }) => (
     selection.fold({
         Nothing: () => (
-            <div>
+            <NoSelection>
                 <h1>Please select section to update</h1>
-            </div>
+            </NoSelection>
         ),
         Just: ({ sheet }) => (<PropertySheet model={sheet} dispatch={dispatch} />)
     })

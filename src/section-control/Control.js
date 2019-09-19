@@ -5,8 +5,6 @@ import {
     faTv,
     faHamburger,
     faEdit,
-    faPlus,
-    faDownload,
     faCheck,
     faSpellCheck
 } from '@fortawesome/free-solid-svg-icons';
@@ -29,27 +27,9 @@ const StyledSection = styled('div')`
     vertical-align: middle;
 `;
 
-export const AddSectionAction = ({ onClick }) => (
-    <StyledSection>
-        <Button isBorderless appeareance="transparent" onClick={() => onClick({ sectionType: 'new_section' })}>
-            <Icon icon={faPlus} />
-            <span>Add Section</span>
-        </Button>
-    </StyledSection>
-);
-
-export const DownloadAction = ({ onClick }) => (
-    <StyledSection>
-        <Button isBorderless appeareance="transparent" onClick={() => onClick({ sectionType: 'download' })}>
-            <Icon icon={faDownload} />
-            <span>Download</span>
-        </Button>
-    </StyledSection>
-);
-
 export const ResumeCheckAction = ({ onClick }) => (
     <StyledSection>
-        <Button isBorderless appeareance="transparent" onClick={() => onClick({ sectionType: 'resume_check' })}>
+        <Button isBorderless appeareance="transparent" onClick={onClick}>
             <Icon icon={faCheck} />
             <span>Resume Check</span>
         </Button>
@@ -58,7 +38,7 @@ export const ResumeCheckAction = ({ onClick }) => (
 
 export const SpellCheckAction = ({ onClick }) => (
     <StyledSection>
-        <Button isBorderless appeareance="transparent" onClick={() => onClick({ sectionType: 'spell_check' })}>
+        <Button isBorderless appeareance="transparent" onClick={onClick}>
             <Icon icon={faSpellCheck} />
             <span>Spell Check</span>
         </Button>

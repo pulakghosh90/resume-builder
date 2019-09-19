@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Grid from '../components/layout/Grid';
 
 const Container = styled('div')`
+    grid-area: main;
     border-left: 1px solid grey;
     border-right: 1px solid grey;
     height: 100%;

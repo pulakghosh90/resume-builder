@@ -19,6 +19,7 @@ const StyledButton = styled('button')`
     line-height: 1.42857143;
     border-radius: 4px;
     user-select: none;
+    margin: 0 5px;
 
     &:focus {
         outline: 0;
@@ -114,10 +115,11 @@ const StyledButton = styled('button')`
     }
 
     &.lg {
-        adding: 10px 16px;
+        padding: 10px 16px;
         font-size: 18px;
         line-height: 1.3333333;
         border-radius: 6px;
+        height: 43px;
     }
 
     &.sm {
@@ -125,6 +127,7 @@ const StyledButton = styled('button')`
         font-size: 12px;
         line-height: 1.5;
         border-radius: 3px;
+        height: 32px;
     }
 
     &.xs {
@@ -132,6 +135,7 @@ const StyledButton = styled('button')`
         font-size: 12px;
         line-height: 1.5;
         border-radius: 3px;
+        height: 26px;
     }
 `;
 

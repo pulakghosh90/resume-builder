@@ -1,15 +1,16 @@
 import { set, get } from 'lodash';
 import { matchPath } from 'react-router';
-import { LOCATION_CHANGE } from 'connected-react-router';
+import { LOCATION_CHANGE, push } from 'connected-react-router';
 import { matchAction, lookupUnsafe, getValues } from '../util/util';
 import lookUpModel from '../property-sheet/PropertySheetRegistry';
 import { Nothing, Just } from '../util/Maybe';
-import { fetchResume } from '../service/DataService';
+import { fetchResume, saveResume, deleteResume, download } from '../service/DataService';
 
 export const init = () => ({
     selection: Nothing(),
     resume: {
-        id: 'none'
+        id: 'none',
+        name: ''
     }
 });
 
@@ -45,6 +46,26 @@ export const Action = {
     Download() {
         return {
             type: 'Download'
+        };
+    },
+    AddSection() {
+        return {
+            type: 'AddSection'
+        };
+    },
+    Duplicate() {
+        return {
+            type: 'Duplicate'
+        };
+    },
+    Delete() {
+        return {
+            type: 'Delete'
+        };
+    },
+    Save() {
+        return {
+            type: 'Save'
         };
     }
 };
@@ -102,9 +123,23 @@ export const update = matchAction({
     SpellCheck(state, action) {
         return state;
     },
-    Download(state, action) {
+    Download({ resume }, action) {
+        // TO DO: implement correctly this function
+        return download(resume.id).then((data) => ({ type: 'DownloadSuccess' }));
+    },
+    AddSection(state, action) {
         return state;
-    }
+    },
+    Duplicate(state, action) {
+        return state;
+    },
+    Delete({ resume }) {
+        return deleteResume(resume.id).then(() => push('/'));
+    },
+    Save({ resume }) {
+        return saveResume(resume).then(({ data }) => Action.LoadResume(data.resume));
+    },
+    '*': (state) => Object.assign({}, state, { loading: false })
 });
 
 export function* effects() { }

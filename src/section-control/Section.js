@@ -5,6 +5,7 @@ import { Action } from '../builder/Builder';
 import { reduceObject } from '../util/util';
 
 const Container = styled('div')`
+    grid-area: lt;
     height: 100%;
     width: 100%;
     padding-left: 10px;
@@ -42,10 +43,6 @@ class Section extends React.Component {
                         )
                     }
                 </Group>
-                <Group>
-                    <AddSectionAction onClick={this.onClick} />
-                </Group>
-                <DownloadAction onClick={() => dispatch(Action.Download())} />
             </Container>
         );
     }

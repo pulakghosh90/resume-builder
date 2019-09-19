@@ -64,6 +64,7 @@ const sectionObj = () => sections.reduce((obj, val) => {
 export const resume = [
     {
         id: 'abc',
+        name: 'pulakendu_ghosh_1',
         userid: 'pulak',
         sections: sectionObj(),
         template: 'default'

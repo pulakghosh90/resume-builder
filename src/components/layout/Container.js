@@ -20,7 +20,7 @@ const addVAAlign = ({ direction, valign }) => (
     valign && (`${direction !== 'horizontal' ? 'align-items' : 'justify-content'} : ${ALIGN[valign]}`)
 );
 
-const addHAAlign = (direction, halign) => (
+const addHAAlign = ({ direction, halign }) => (
     halign && (`${direction === 'horizontal' ? 'justify-content' : 'align-items'} : ${ALIGN[halign]}`)
 );
 
