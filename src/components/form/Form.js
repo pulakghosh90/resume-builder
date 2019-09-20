@@ -9,14 +9,16 @@ import CheckboxElement from '../input-elements/CheckboxElement';
 import RadioGroupElement from '../input-elements/RadioElement';
 import SelectElement from '../input-elements/SelectElement';
 import Icon from '../icon/Icon';
+import WorkHistory from '../resume-section/WorkHistory';
 
 const ControlComponents = {
     String: StringElement,
     Checkbox: CheckboxElement,
     Raddio: RadioGroupElement,
     Choice: SelectElement,
-    // TO DO: implement specific control
-    Date: StringElement
+    // TODO: implement specific control
+    Date: StringElement,
+    WorkHistory
 };
 
 const StyledLabel = styled('label')`

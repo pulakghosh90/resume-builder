@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { ClassNames } from '@emotion/core';
 import { formControlStyles } from './formControlStyles';
 
-// TO DO: use react-select
+// TODO: use react-select
 const StyledSelect = styled('select')`
     ${formControlStyles}
     height: calc(2.25rem + 2px);

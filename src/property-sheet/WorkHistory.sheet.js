@@ -5,70 +5,10 @@ import { replace } from '../util/util';
 
 const getFieldDefs = () => ([
     {
-        id: 'jobTitle',
-        label: 'Job Title',
-        controlType: 'String',
-        value: '',
-        visibility: true,
-        readOnly: false,
-        required: false,
-        errors: []
-    },
-    {
-        id: 'employer',
-        label: 'Employer',
-        controlType: 'String',
-        value: '',
-        visibility: true,
-        readOnly: false,
-        required: false,
-        errors: []
-    },
-    {
-        id: 'city',
-        label: 'City',
-        controlType: 'String',
-        value: '',
-        visibility: true,
-        readOnly: false,
-        required: false,
-        errors: []
-    },
-    {
-        id: 'state',
-        label: 'State',
-        controlType: 'String',
-        value: '',
-        visibility: true,
-        readOnly: false,
-        required: false,
-        errors: []
-    },
-    {
-        id: 'startDate',
-        label: 'Start Date',
-        controlType: 'Date',
-        value: '',
-        visibility: true,
-        readOnly: false,
-        required: false,
-        errors: []
-    },
-    {
-        id: 'endDate',
-        label: 'End Date',
-        controlType: 'Date',
-        value: '',
-        visibility: true,
-        readOnly: false,
-        required: false,
-        errors: []
-    },
-    {
-        id: 'currentEmployer',
-        label: 'Working Now',
-        controlType: 'Checkbox',
-        value: false,
+        id: 'histories',
+        label: 'Work History',
+        controlType: 'WorkHistory',
+        value: [],
         visibility: true,
         readOnly: false,
         required: false,
@@ -89,7 +29,7 @@ export const onUpdate = ({ id, value }, prevSheet, state) => {
 
 export const onLoad = (sheet_, state, sectionType) => {
     const sectionPath = ['resume', 'sections', sectionType];
-    // TO DO: implement some card view to show multiple work history
-    const { histories } = get(state, sectionPath);
-    return SheetMutation(sheet_).loadValues(histories[0]).save();
+    // TODO: implement some card view to show multiple work history
+    const workHistory = get(state, sectionPath);
+    return SheetMutation(sheet_).loadValues(workHistory).save();
 };

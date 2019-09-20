@@ -150,7 +150,7 @@ export const sections = [
         sectionType: 'award',
         awards: [
             {
-                name: 'Star of the month',
+                name: 'MAS Star of the month',
                 label: 'Star of the month',
                 date: '2017/08',
                 description: 'Received this award for outstanding performance in Shift Swap feature in TLM product in ADP'

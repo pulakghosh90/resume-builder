@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
-import createHashHistory from 'history/createHashHistory';
+import { createHashHistory } from 'history';
 import ResumeBuilder from '../builder/ResumeBuilder';
 
 export const history = createHashHistory();

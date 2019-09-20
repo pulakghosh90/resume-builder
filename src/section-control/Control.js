@@ -9,14 +9,13 @@ import {
     faSpellCheck
 } from '@fortawesome/free-solid-svg-icons';
 import { keySwitch } from '../util/util';
-import Icon from '../components/icon/Icon';
-import Button from '../components/button/Button';
+import IconButton from '../components/button/IconButton';
 
 const getIcon = keySwitch('sectionType', {
-    education: () => <Icon icon={faBook} />,
-    links: () => <Icon icon={faTv} />,
-    profileSummary: () => <Icon icon={faHamburger} />,
-    _: () => <Icon icon={faEdit} />
+    education: () => faBook,
+    links: () => faTv,
+    profileSummary: () => faHamburger,
+    _: () => faEdit
 });
 
 const StyledSection = styled('div')`
@@ -29,29 +28,18 @@ const StyledSection = styled('div')`
 
 export const ResumeCheckAction = ({ onClick }) => (
     <StyledSection>
-        <Button isBorderless appeareance="transparent" onClick={onClick}>
-            <Icon icon={faCheck} />
-            <span>Resume Check</span>
-        </Button>
+        <IconButton label="Resume Check" icon={faCheck} onClick={onClick} />
     </StyledSection>
 );
 
 export const SpellCheckAction = ({ onClick }) => (
     <StyledSection>
-        <Button isBorderless appeareance="transparent" onClick={onClick}>
-            <Icon icon={faSpellCheck} />
-            <span>Spell Check</span>
-        </Button>
+        <IconButton label="Spell Check" icon={faSpellCheck} onClick={onClick} />
     </StyledSection>
 );
 
 export const SectionType = ({ label, sectionType, onClick }) => (
     <StyledSection>
-        <Button isBorderless appeareance="transparent" onClick={() => onClick({ sectionType })}>
-            {
-                getIcon({ sectionType })
-            }
-            <span>{label}</span>
-        </Button>
+        <IconButton label={label} icon={getIcon({ sectionType })} onClick={() => onClick({ sectionType })} />
     </StyledSection>
 );

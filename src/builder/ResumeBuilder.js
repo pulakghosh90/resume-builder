@@ -15,7 +15,7 @@ const CustomGrid = styled(Grid)`
     grid-auto-rows: minmax(50px, auto);
     grid-template-areas:
       'hd hd hd hd hd hd hd hd hd hd hd hd'
-      'lt lt main main main main main main main rt rt rt';
+      'lt lt main main main main main main rt rt rt rt';
 `;
 
 const FlexContainer = styled(Container)`
