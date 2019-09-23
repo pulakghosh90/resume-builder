@@ -19,16 +19,14 @@ function loadStories() {
 }
 
 const decorator = (story) => (
-    <Provider store={create()}>
-        <DndProvider backend={HTML5Backend}>
-            <ThemeProvider theme={theme}>
-                <GlobalStyles />
-                {story()}
-            </ThemeProvider>
-        </DndProvider>
-    </Provider>
+    <DndProvider backend={HTML5Backend}>
+        <ThemeProvider theme={theme}>
+            <GlobalStyles />
+            {story()}
+        </ThemeProvider>
+    </DndProvider>
 );
 
-// addDecorator(decorator);
+addDecorator(decorator);
 addDecorator(checkA11y);
 configure(loadStories, module);
