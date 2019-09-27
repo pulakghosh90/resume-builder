@@ -111,7 +111,7 @@ export default function ModalElement(props) {
             <Header title={title} onClose={onClose} />
             <Body>{children}</Body>
             <Footer>
-                <Button appeareance="secondary" onClick={onClose} text="Cancel" />
+                <Button onClick={onClose} text="Cancel" />
                 <Button appeareance="primary" onClick={onSave} text="Save" />
             </Footer>
         </StyledModal>

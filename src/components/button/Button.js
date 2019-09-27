@@ -144,6 +144,7 @@ export default function Button(props) {
         onClick,
         text,
         disabled = false,
+        className,
         appeareance = 'default',
         isBorderless = false,
         size = 'sm',
@@ -156,7 +157,7 @@ export default function Button(props) {
                     <StyledButton
                         onClick={onClick}
                         disabled={disabled}
-                        className={cx(appeareance, size, { borderless: isBorderless })}
+                        className={cx(className, appeareance, size, { borderless: isBorderless })}
                     >
                         {children ? children : text}
                     </StyledButton>
@@ -182,5 +183,6 @@ Button.propTypes = {
         'lg'
     ]),
     disabled: PropTypes.bool,
-    isBorderless: PropTypes.bool
+    isBorderless: PropTypes.bool,
+    className: PropTypes.string
 };

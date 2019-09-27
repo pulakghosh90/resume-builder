@@ -16,6 +16,89 @@ const getFieldDefs = () => ([
     }
 ]);
 
+const getEditFormFieldDefs = () => ([
+    {
+        id: 'designation',
+        label: 'Designation',
+        controlType: 'String',
+        value: '',
+        visibility: true,
+        readOnly: false,
+        required: false,
+        errors: []
+    },
+    {
+        id: 'company',
+        label: 'Company',
+        controlType: 'String',
+        value: '',
+        visibility: true,
+        readOnly: false,
+        required: false,
+        errors: []
+    },
+    {
+        id: 'city',
+        label: 'City',
+        controlType: 'String',
+        value: '',
+        visibility: true,
+        readOnly: false,
+        required: false,
+        errors: []
+    },
+    {
+        id: 'state',
+        label: 'State',
+        controlType: 'String',
+        value: '',
+        visibility: true,
+        readOnly: false,
+        required: false,
+        errors: []
+    },
+    {
+        id: 'startDate',
+        label: 'Start Date',
+        controlType: 'Date',
+        value: '',
+        visibility: true,
+        readOnly: false,
+        required: false,
+        errors: []
+    },
+    {
+        id: 'endDate',
+        label: 'End Date',
+        controlType: 'Date',
+        value: '',
+        visibility: true,
+        readOnly: false,
+        required: false,
+        errors: []
+    },
+    {
+        id: 'currentCompany',
+        label: 'Current Company',
+        controlType: 'Checkbox',
+        value: false,
+        visibility: true,
+        readOnly: false,
+        required: false,
+        errors: []
+    },
+    {
+        id: 'descriptions',
+        label: 'Description',
+        controlType: 'String',
+        value: false,
+        visibility: true,
+        readOnly: false,
+        required: false,
+        errors: []
+    }
+]);
+
 export const sheet = FormModelBuilder()
     .action('UpdateProperty')
     .fields(getFieldDefs())
@@ -33,3 +116,7 @@ export const onLoad = (sheet_, state, sectionType) => {
     const workHistory = get(state, sectionPath);
     return SheetMutation(sheet_).loadValues(workHistory).save();
 };
+
+export const historyFormSheet = FormModelBuilder()
+    .fields(getEditFormFieldDefs())
+    .build();

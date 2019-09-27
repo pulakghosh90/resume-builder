@@ -1,3 +1,4 @@
+import cuid from 'cuid';
 import { Nothing } from './Maybe';
 
 export const isNumber = (x) => typeof x === 'number';
@@ -87,3 +88,6 @@ export const getValues = (sheet) => {
         return seed;
     }, {});
 };
+
+
+export const addId = (arr) => arr.map((el) => ({ ...el, id: cuid() }));

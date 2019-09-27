@@ -68,8 +68,8 @@ Grid.defaultProps = {
     debug: false,
     gap: 0,
     columns: '1fr 1fr'.split(' '),
-    autoRows: '',
-    autoColumns: '',
+    autoRows: '1fr 1fr',
+    autoColumns: '1fr 1fr',
     hAlign: 'stretch',
     vAlign: 'stretch'
 };

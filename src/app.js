@@ -1,4 +1,6 @@
 import React from 'react';
+import { render } from 'react-dom';
+import Modal from 'react-modal';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'emotion-theming';
 import { DndProvider } from 'react-dnd';
@@ -20,3 +22,9 @@ export default function App() {
         </Provider>
     );
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const root = document.getElementById('root');
+    Modal.setAppElement('#root');
+    render(<App />, root);
+});
