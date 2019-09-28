@@ -7,9 +7,7 @@ export default function Icon(props) {
     const style = {
         fontSize,
         color,
-        lineHeight: fontSize,
-        verticalAlign: 'middle',
-        marginRight: '10px'
+        lineHeight: fontSize
     };
     return <FontAwesomeIcon className={className} style={style} icon={icon} aria-hidden={ariaHidden} />;
 }

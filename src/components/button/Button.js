@@ -81,12 +81,14 @@ const StyledButton = styled('button')`
 
     &.borderless {
         border-color: transparent;
+        outline: none;
     }
 
     &.borderless:hover {
         border-color: transparent;
         background-color: transparent;
         box-shadow: none;
+        outline: none;
     }
 
     &.borderless:focus {
@@ -115,7 +117,6 @@ const StyledButton = styled('button')`
     }
 
     &.lg {
-        padding: 10px 16px;
         font-size: 18px;
         line-height: 1.3333333;
         border-radius: 6px;
@@ -123,7 +124,6 @@ const StyledButton = styled('button')`
     }
 
     &.sm {
-        padding: 5px 10px;
         font-size: 12px;
         line-height: 1.5;
         border-radius: 3px;
@@ -131,7 +131,6 @@ const StyledButton = styled('button')`
     }
 
     &.xs {
-        padding: 1px 5px;
         font-size: 12px;
         line-height: 1.5;
         border-radius: 3px;
@@ -145,6 +144,7 @@ export default function Button(props) {
         onClick,
         text,
         disabled = false,
+        className,
         appeareance = 'default',
         isBorderless = false,
         size = 'sm',
@@ -157,7 +157,7 @@ export default function Button(props) {
                     <StyledButton
                         onClick={onClick}
                         disabled={disabled}
-                        className={cx(appeareance, size, { borderless: isBorderless })}
+                        className={cx(className, appeareance, size, { borderless: isBorderless })}
                     >
                         {children ? children : text}
                     </StyledButton>
@@ -183,5 +183,6 @@ Button.propTypes = {
         'lg'
     ]),
     disabled: PropTypes.bool,
-    isBorderless: PropTypes.bool
+    isBorderless: PropTypes.bool,
+    className: PropTypes.string
 };

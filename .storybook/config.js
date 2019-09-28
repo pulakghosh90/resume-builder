@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from 'react-modal';
 import { configure, addDecorator } from '@storybook/react';
 import { checkA11y } from '@storybook/addon-a11y';
 import { withOptions } from '@storybook/addon-options';
@@ -19,16 +20,18 @@ function loadStories() {
 }
 
 const decorator = (story) => (
-    <Provider store={create()}>
-        <DndProvider backend={HTML5Backend}>
-            <ThemeProvider theme={theme}>
-                <GlobalStyles />
-                {story()}
-            </ThemeProvider>
-        </DndProvider>
-    </Provider>
+    <DndProvider backend={HTML5Backend}>
+        <ThemeProvider theme={theme}>
+            <GlobalStyles />
+            {story()}
+        </ThemeProvider>
+    </DndProvider>
 );
 
-// addDecorator(decorator);
+addDecorator(decorator);
+addDecorator((story) => {
+    Modal.setAppElement('#root');
+    return story();
+})
 addDecorator(checkA11y);
 configure(loadStories, module);

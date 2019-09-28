@@ -78,7 +78,7 @@ export const update = matchAction({
             exact: true,
             strict: false
         });
-        // TO DO: get the id from route
+        // TODO: get the id from route
         if (match) {
             if (match.params.id !== state.resume.id) {
                 return Promise.resolve(Action.FetchResume('abc'));
@@ -109,7 +109,7 @@ export const update = matchAction({
         const selection = lookupUnsafe('selection', state);
         const { sheet: prevSheet, model, sectionType } = selection;
         const newState = model.onUpdate(action, prevSheet, state);
-        // TO DO: new function for this task
+        // TODO: new function for this task
         const sectionPath = ['resume', 'sections', sectionType];
         const oldValues = get(state, sectionPath);
         const { sheet: newSheet } = lookupUnsafe('selection', newState);
@@ -124,7 +124,7 @@ export const update = matchAction({
         return state;
     },
     Download({ resume }, action) {
-        // TO DO: implement correctly this function
+        // TODO: implement correctly this function
         return download(resume.id).then((data) => ({ type: 'DownloadSuccess' }));
     },
     AddSection(state, action) {

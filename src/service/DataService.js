@@ -6,7 +6,7 @@ const delay = (ms) => (fn, args) => setTimeout(fn, ms, args);
 const delay1s = delay(1000);
 const delay0s = delay(0);
 
-// TO DO: implement proper service
+// TODO: implement proper service
 export const getSections = () => Promise.resolve(sections);
 
 export const fetchResume = (rid) => (

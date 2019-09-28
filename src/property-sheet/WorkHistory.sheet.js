@@ -5,8 +5,21 @@ import { replace } from '../util/util';
 
 const getFieldDefs = () => ([
     {
-        id: 'jobTitle',
-        label: 'Job Title',
+        id: 'histories',
+        label: 'Work History',
+        controlType: 'WorkHistory',
+        value: [],
+        visibility: true,
+        readOnly: false,
+        required: false,
+        errors: []
+    }
+]);
+
+const getEditFormFieldDefs = () => ([
+    {
+        id: 'designation',
+        label: 'Designation',
         controlType: 'String',
         value: '',
         visibility: true,
@@ -15,8 +28,8 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'employer',
-        label: 'Employer',
+        id: 'company',
+        label: 'Company',
         controlType: 'String',
         value: '',
         visibility: true,
@@ -65,8 +78,18 @@ const getFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'currentEmployer',
-        label: 'Working Now',
+        id: 'descriptions',
+        label: 'Description',
+        controlType: 'String',
+        value: '',
+        visibility: true,
+        readOnly: false,
+        required: false,
+        errors: []
+    },
+    {
+        id: 'currentCompany',
+        label: 'Current Company',
         controlType: 'Checkbox',
         value: false,
         visibility: true,
@@ -89,7 +112,9 @@ export const onUpdate = ({ id, value }, prevSheet, state) => {
 
 export const onLoad = (sheet_, state, sectionType) => {
     const sectionPath = ['resume', 'sections', sectionType];
-    // TO DO: implement some card view to show multiple work history
-    const { histories } = get(state, sectionPath);
-    return SheetMutation(sheet_).loadValues(histories[0]).save();
+    // TODO: implement some card view to show multiple work history
+    const workHistory = get(state, sectionPath);
+    return SheetMutation(sheet_).loadValues(workHistory).save();
 };
+
+export const getHistoryFormSheet = () => FormModelBuilder().fields(getEditFormFieldDefs()).build();
