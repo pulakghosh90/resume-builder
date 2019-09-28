@@ -11,9 +11,9 @@ import Button from '../button/Button';
 import List from '../list/List';
 import IconButton from '../button/IconButton';
 import Modal from '../modal/Modal';
-import { addId, getValues } from '../../util/util';
+import { getValues } from '../../util/util';
 import StringElement from '../input-elements/StringElement';
-import { historyFormSheet } from '../../property-sheet/WorkHistory.sheet';
+import { getHistoryFormSheet } from '../../property-sheet/WorkHistory.sheet';
 import SheetMutation from '../../property-sheet/model-builder/SheetMutation';
 import Grid from '../layout/Grid';
 import CheckboxElement from '../input-elements/CheckboxElement';
@@ -89,27 +89,42 @@ const Controls = {
     Checkbox: CheckboxElement
 };
 
-const Field = ({ controlType, label, value, id, onChange }) => {
+const Field = ({ controlType, label, value, id, onChange, ...rest }) => {
     const Component = Controls[controlType];
     return (
         <div>
             <label htmlFor={id}>{label}</label>
-            <Component id={id} value={value} onChange={onChange} />
+            <Component id={id} value={value} onChange={onChange} {...rest} />
         </div>
     );
 };
 
 const preventSubmit = (e) => e.preventDefault();
 // TODO: need to do it in better way, dont replicate the same form logic here
-function WorkEditForm({ work, onSave, onClose, isOpen }) {
-    const [sheet, setSheet] = useState(() => SheetMutation(historyFormSheet).loadValues(work).save());
+function WorkEditForm({ work, idx, onSave, onClose, isOpen }) {
+    const [sheet, setSheet] = useState(() => (
+        SheetMutation(getHistoryFormSheet())
+            .loadValues(work)
+            .setReadOnly('endDate', work.currentCompany)
+            .save()
+    ));
     const fields = Array.from(sheet.fields.values());
-    const onChange = ({ id, value }) => setSheet(SheetMutation(sheet).setValue(id, value).save());
+    const onChange = ({ id, value }) => {
+        const sm = SheetMutation(sheet).setValue(id, value);
+        if (id === 'currentCompany') {
+            if (value) sm.setValue('endDate', '');
+            sm.setReadOnly('endDate', value);
+        }
+        if (id === 'descriptions') {
+            sm.setValue(id, [value]);
+        }
+        setSheet(sm.save());
+    };
     return (
         <Modal
             isOpen={isOpen}
             onClose={onClose}
-            onSave={() => onSave(getValues(sheet))}
+            onSave={() => onSave({ work: getValues(sheet), idx })}
             title="Work History"
         >
             <form onSubmit={preventSubmit}>
@@ -162,53 +177,58 @@ export default class WorkHistory extends React.Component {
         value: PropTypes.arrayOf(PropTypes.object).isRequired
     }
 
-    static getDerivedStateFromProps(props, state) {
-        if (!state.history) {
-            return {
-                isOpen: false,
-                workInEdit: {},
-                history: addId(props.value)
-            };
-        }
-        return null;
+    static getDerivedStateFromProps(props) {
+        return {
+            history: props.value
+        };
     }
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            isOpen: false,
+            workInEdit: null
+        };
     }
 
     toggleOpen = () => this.setState(({ isOpen }) => ({ isOpen: !isOpen }))
 
-    onEdit = (work) => this.setState({ workInEdit: work, isOpen: true })
+    onEdit = (idx) => this.setState({ workInEdit: idx, isOpen: true })
 
-    onDelete = (work) => {
+    onDelete = (idx) => {
         const { history } = this.state;
         const { onChange, id } = this.props;
-        onChange({ id, value: history.filter((h) => h.id !== work.id) });
-        this.setState({ workInEdit: {}, isOpen: false });
+        onChange({ id, value: history.filter((h, i) => i !== idx) });
+        this.setState({ workInEdit: null, isOpen: false });
     };
 
-    onSave = (work) => {
+    onSave = ({ work, idx }) => {
         const { history } = this.state;
         const { onChange, id } = this.props;
-        onChange({ id, value: history.map((h) => (h.id === work.id ? work : h)) });
-        this.setState({ workInEdit: {}, isOpen: false });
+        let value;
+        if (idx === -1) {
+            value = [...history, work];
+        } else {
+            value = history.map((h, i) => (i === idx ? work : h));
+        }
+        onChange({ id, value });
+        this.setState({ workInEdit: null, isOpen: false });
     };
 
-    onAdd = () => this.setState({ workInEdit: {}, isOpen: true })
+    onAdd = () => this.setState({ workInEdit: -1, isOpen: true })
 
     render() {
         const { history, isOpen, workInEdit } = this.state;
+        const workEdit = (workInEdit !== null && history[workInEdit]) || {};
         return (
             <div>
                 {
-                    history.map((work) => (
+                    history.map((work, idx) => (
                         <WorkCard
                             key={work.company}
                             work={work}
-                            onEdit={() => this.onEdit(work)}
-                            onDelete={() => this.onDelete(work)}
+                            onEdit={() => this.onEdit(idx)}
+                            onDelete={() => this.onDelete(idx)}
                         />
                     ))
                 }
@@ -217,7 +237,8 @@ export default class WorkHistory extends React.Component {
                     isOpen && (
                         <WorkEditForm
                             isOpen={isOpen}
-                            work={workInEdit}
+                            work={workEdit}
+                            idx={workInEdit}
                             onSave={this.onSave}
                             onClose={this.toggleOpen}
                         />

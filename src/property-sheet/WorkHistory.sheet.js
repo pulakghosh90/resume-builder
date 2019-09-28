@@ -78,19 +78,19 @@ const getEditFormFieldDefs = () => ([
         errors: []
     },
     {
-        id: 'currentCompany',
-        label: 'Current Company',
-        controlType: 'Checkbox',
-        value: false,
+        id: 'descriptions',
+        label: 'Description',
+        controlType: 'String',
+        value: '',
         visibility: true,
         readOnly: false,
         required: false,
         errors: []
     },
     {
-        id: 'descriptions',
-        label: 'Description',
-        controlType: 'String',
+        id: 'currentCompany',
+        label: 'Current Company',
+        controlType: 'Checkbox',
         value: false,
         visibility: true,
         readOnly: false,
@@ -117,6 +117,4 @@ export const onLoad = (sheet_, state, sectionType) => {
     return SheetMutation(sheet_).loadValues(workHistory).save();
 };
 
-export const historyFormSheet = FormModelBuilder()
-    .fields(getEditFormFieldDefs())
-    .build();
+export const getHistoryFormSheet = () => FormModelBuilder().fields(getEditFormFieldDefs()).build();
