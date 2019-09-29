@@ -162,7 +162,7 @@ const Preview = (props) => {
     } = sections;
     return (
         <Container>
-            <Grid height="100%" width="100%" columns={columns} rows={rows} gap={0}>
+            <Grid id="main-preview" height="100%" width="100%" columns={columns} rows={rows} gap={0}>
                 <Box direction="vertical" halign="left" background="#f4d295">
                     <PersonalDetail {...heading} />
                     <Links {...link} />

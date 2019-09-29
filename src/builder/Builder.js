@@ -125,7 +125,11 @@ export const update = matchAction({
     },
     Download({ resume }, action) {
         // TODO: implement correctly this function
-        return download(resume.id).then((data) => ({ type: 'DownloadSuccess' }));
+        const camera = {
+            width: '2480px',
+            height: '3508px'
+        };
+        return download(camera).then((data) => ({ type: 'DownloadSuccess' }));
     },
     AddSection(state, action) {
         return state;
