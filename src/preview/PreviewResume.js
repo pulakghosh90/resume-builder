@@ -24,7 +24,6 @@ const SectionWrapper = styled('div')`
 `;
 
 const Box = styled(FlexContainer)`
-    // border: 1px dashed grey;
     padding: 10px;
 `;
 
