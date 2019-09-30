@@ -28,13 +28,13 @@ const StyledLabel = styled('label')`
     text-align: right;
 `;
 
-const FormControlContainer = styled(FlexContainer)`
+const FormGroup = styled(FlexContainer)`
     margin: 10px 0;
 `;
 
 const FieldError = styled('div')`
-    color: red;
-    margin: 5px 0;
+    color: #dc3545;
+    margin: 5px 0 0 3px;
 `;
 
 const ControlContainer = styled('div')`
@@ -106,9 +106,9 @@ export default function Form({ model, onChange }) {
                         : isSection(field)
                             ? <Section key={field.id} {...field} />
                             : (
-                                <FormControlContainer key={field.id}>
-                                    <FormControl field={field} onChange={onChange} />
-                                </FormControlContainer>
+                                <FormGroup key={field.id}>
+                                    <FormControl key={field.id} field={field} onChange={onChange} />
+                                </FormGroup>
                             )
                 ))
             }

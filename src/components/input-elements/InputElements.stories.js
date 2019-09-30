@@ -22,7 +22,7 @@ storiesOf('Input Elements', module)
         const { onChange } = actions('onChange');
         return (
             <StringElement
-                name="string-el"
+                id="string-el"
                 value=""
                 onChange={onChange}
                 size={size}
@@ -52,7 +52,7 @@ storiesOf('Input Elements', module)
         const { onChange } = actions('onChange');
         return (
             <RadioGroupElement
-                name="radio-group"
+                id="radio-group"
                 value={value}
                 onChange={onChange}
                 choices={choices}
@@ -65,7 +65,7 @@ storiesOf('Input Elements', module)
         const { onChange } = actions('onChange');
         return (
             <CheckboxElement
-                name="checkbox-el"
+                id="checkbox-el"
                 value="option1"
                 onChange={onChange}
                 readOnly={readOnly}
@@ -93,7 +93,7 @@ storiesOf('Input Elements', module)
         const { onChange } = actions('onChange');
         return (
             <CheckboxGroup
-                name="checkbox-group"
+                id="checkbox-group"
                 value={value}
                 onChange={onChange}
                 choices={choices}
@@ -122,7 +122,7 @@ storiesOf('Input Elements', module)
         const { onChange } = actions('onChange');
         return (
             <SelectElement
-                name="select-el"
+                id="select-el"
                 value={value}
                 choices={choices}
                 onChange={onChange}
