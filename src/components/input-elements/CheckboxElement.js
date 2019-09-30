@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { ClassNames } from '@emotion/core';
+import commonProps from './commonProps';
 
 const toSet = (list) => new Set(list);
 const toArray = (set) => Array.from(set);
@@ -36,11 +37,8 @@ export default function CheckboxElement(props) {
 }
 
 CheckboxElement.propTypes = {
-    id: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-    onChange: PropTypes.func.isRequired,
-    readOnly: PropTypes.bool,
-    className: PropTypes.string
+    ...commonProps,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
 const GroupContainer = styled('div')`
@@ -106,14 +104,11 @@ export class CheckboxGroup extends React.Component {
 }
 
 CheckboxGroup.propTypes = {
-    id: PropTypes.string.isRequired,
-    value: PropTypes.arrayOf(PropTypes.string).isRequired,
+    ...commonProps,
     choices: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string,
         value: PropTypes.string,
         readOnly: PropTypes.bool
     })).isRequired,
-    onChange: PropTypes.func.isRequired,
-    className: PropTypes.string,
     inline: PropTypes.bool
 };

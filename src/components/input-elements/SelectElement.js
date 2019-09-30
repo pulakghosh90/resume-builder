@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { ClassNames } from '@emotion/core';
 import { formControlStyles } from './formControlStyles';
+import commonProps from './commonProps';
 
-// TODO: use react-select
 const StyledSelect = styled('select')`
     ${formControlStyles}
     height: calc(2.25rem + 2px);
@@ -38,7 +38,7 @@ export default function SelectElement(props) {
                         className={cx(className, size, { disabled: readOnly })}
                     >
                         {
-                            choices.map(({ label, value }, idx) => <option key={idx} value={value}>{label}</option>)
+                            choices.map(({ label, value: val }) => <option key={val} value={val}>{label}</option>)
                         }
                     </StyledSelect>
                 )
@@ -48,15 +48,11 @@ export default function SelectElement(props) {
 }
 
 SelectElement.propTypes = {
-    id: PropTypes.string.isRequired,
-    value: PropTypes.string,
+    ...commonProps,
     choices: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string,
         value: PropTypes.string
     })).isRequired,
-    onChange: PropTypes.func.isRequired,
-    readOnly: PropTypes.bool,
-    className: PropTypes.string,
     size: PropTypes.oneOf([
         'default',
         'sm',
