@@ -1,4 +1,3 @@
-import cuid from 'cuid';
 import { Nothing } from './Maybe';
 
 export const isNumber = (x) => typeof x === 'number';
@@ -48,14 +47,6 @@ export const replace = (key, value, kollect) => {
     return copy;
 };
 
-export const mapObject = (f, obj) => {
-    const copy = {};
-    for (const k in obj) {
-        copy[k] = f(k, obj[k]);
-    }
-    return copy;
-};
-
 export const reduceObject = (f, seed, obj) => {
     for (const k in obj) {
         seed = f(seed, k, obj[k]);
@@ -63,28 +54,12 @@ export const reduceObject = (f, seed, obj) => {
     return seed;
 };
 
-export const reduce = {
-    Object(f, seed, obj) {
-        for (const key in obj) {
-            seed = f(seed, key, obj[key]);
-        }
-        return seed;
-    },
-    Array(f, seed, list) {
-        for (let i = 0; i < list.length; i++) {
-            seed = f(seed, i, list[i]);
-        }
-        return seed;
-    }
-};
-
 export const getValues = (sheet) => {
-    const fields = Array.from(sheet.fields.values());
-    return fields.reduce((seed, field) => {
+    return sheet.fields.reduce((seed, field, id) => {
         if (field.heading || field.section) {
             return seed;
         }
-        seed[field.id] = field.value;
+        seed[id] = field.value;
         return seed;
     }, {});
 };
