@@ -17,15 +17,15 @@ export default function IconButton(props) {
     const {
         icon,
         onClick,
-        iconSize,
+        fontSize,
         label,
         children,
         ...rest
     } = props;
     return (
-        <Button onClick={onClick} isBorderless size="xs" {...rest}>
+        <Button onClick={onClick} appeareance="icon" {...rest}>
             <Flex>
-                <Icon className="btn-icon" icon={icon} fontSize={iconSize} color="#666" />
+                <Icon className="btn-icon" icon={icon} fontSize={fontSize} color="#666" />
                 {label && <Text>{label}</Text>}
                 {children}
             </Flex>
@@ -36,7 +36,7 @@ export default function IconButton(props) {
 IconButton.propTypes = {
     icon: PropTypes.object.isRequired,
     onClick: PropTypes.func.isRequired,
-    iconSize: PropTypes.string,
+    fontSize: PropTypes.string,
     label: PropTypes.string,
     children: PropTypes.object
 };

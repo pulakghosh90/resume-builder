@@ -10,6 +10,7 @@ import RadioGroupElement from '../input-elements/RadioElement';
 import SelectElement from '../input-elements/SelectElement';
 import Icon from '../icon/Icon';
 import WorkHistory from '../resume-section/WorkHistory';
+import Skill from '../resume-section/Skill';
 
 const ControlComponents = {
     String: StringElement,
@@ -18,7 +19,8 @@ const ControlComponents = {
     Choice: SelectElement,
     // TODO: implement specific control
     Date: StringElement,
-    WorkHistory
+    WorkHistory,
+    Skill
 };
 
 const StyledLabel = styled('label')`
