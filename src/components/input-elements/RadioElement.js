@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { ClassNames } from '@emotion/core';
 import { disabledClass } from './formControlStyles';
+import commonProps from './commonProps';
 
 const StyledRadio = styled('input')`
     cursor: pointer;
@@ -62,14 +63,11 @@ export default function RadioGroupElement(props) {
 }
 
 RadioGroupElement.propTypes = {
-    id: PropTypes.string.isRequired,
-    value: PropTypes.string,
+    ...commonProps,
     choices: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string,
         value: PropTypes.string,
         readOnly: PropTypes.bool
     })),
-    onChange: PropTypes.func.isRequired,
-    className: PropTypes.string,
     inline: PropTypes.bool
 };

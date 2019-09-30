@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { ClassNames } from '@emotion/core';
 import { formControlStyles } from './formControlStyles';
+import commonProps from './commonProps';
 
 const StyledInput = styled('input')`
     ${formControlStyles}
@@ -59,15 +60,10 @@ export default function StringElement(props) {
 }
 
 StringElement.propTypes = {
-    id: PropTypes.string.isRequired,
-    value: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
+    ...commonProps,
     size: PropTypes.oneOf([
         'sm',
         'lg',
         'default'
-    ]),
-    readOnly: PropTypes.bool,
-    className: PropTypes.string,
-    placeHolder: PropTypes.string
+    ])
 };

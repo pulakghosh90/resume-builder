@@ -82,6 +82,7 @@ const StyledButton = styled('button')`
     &.borderless {
         border-color: transparent;
         outline: none;
+        border: none;
     }
 
     &.borderless:hover {
@@ -136,6 +137,32 @@ const StyledButton = styled('button')`
         border-radius: 3px;
         height: 26px;
     }
+
+    &.icon {
+        border-color: transparent;
+        outline: none;
+        border: none;
+        box-shadow: none;
+    }
+
+    &.icon:hover {
+        border-color: transparent;
+        background-color: transparent;
+        box-shadow: none;
+        outline: none;
+    }
+
+    &.icon:focus {
+        border-color: transparent;
+        box-shadow: none;
+        background-color: transparent;
+    }
+
+    &.icon:active {
+        border-color: transparent;
+        background-color: transparent;
+        box-shadow: none;
+    }
 `;
 
 
@@ -147,7 +174,7 @@ export default function Button(props) {
         className,
         appeareance = 'default',
         isBorderless = false,
-        size = 'sm',
+        size,
         children
     } = props;
     return (
@@ -175,12 +202,14 @@ Button.propTypes = {
         'default',
         'primary',
         'destructive',
-        'transparent'
+        'transparent',
+        'icon'
     ]),
     size: PropTypes.oneOf([
         'xs',
         'sm',
-        'lg'
+        'lg',
+        null
     ]),
     disabled: PropTypes.bool,
     isBorderless: PropTypes.bool,

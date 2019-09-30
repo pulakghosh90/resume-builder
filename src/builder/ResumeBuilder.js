@@ -11,6 +11,7 @@ import Container from '../components/layout/Container';
 import { Action } from './Builder';
 
 const CustomGrid = styled(Grid)`
+    border: solid #f7f7f9;
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: minmax(50px, auto);
     grid-template-areas:
@@ -20,7 +21,7 @@ const CustomGrid = styled(Grid)`
 
 const FlexContainer = styled(Container)`
     grid-area: hd;
-    border: 1px dashed grey;
+    border-bottom: solid #f7f7f9;
     height: 50px;
     justify-content: space-between;
     align-items: center;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { SectionType, ResumeCheckAction, SpellCheckAction, AddSectionAction, DownloadAction } from './Control';
+import { SectionType, ResumeCheckAction, SpellCheckAction } from './Control';
 import { Action } from '../builder/Builder';
 import { reduceObject } from '../util/util';
 
@@ -12,7 +12,7 @@ const Container = styled('div')`
 `;
 
 const Group = styled('div')`
-    border-bottom: 2px solid #e8ecf0;
+    border-bottom: solid #f7f7f9;
     padding: 0px 0px 8px 0px;
     margin: 0px 0px 16px 0px;
 `;
