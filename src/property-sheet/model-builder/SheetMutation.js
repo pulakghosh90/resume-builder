@@ -6,7 +6,7 @@ export default function SheetMutation(sheet = {}) {
         loadValues(values) {
             newSheet.fields = newSheet.fields.map((field, id) => {
                 if (values[id]) {
-                    return Object.assign(field, { value: values[id] });
+                    return Object.assign({}, field, { value: values[id] });
                 }
                 return field;
             });
