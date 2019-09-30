@@ -14,12 +14,14 @@ const StyledBadge = styled('div')`
     vertical-align: baseline;
     border-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin-top: 5px;
 
     &.pill {
         padding-right: 0.6em;
         padding-left: 0.6em;
         border-radius: 10rem;
-        margin: 0 5px;
+        margin-left: 5px;
+        margin-right: 5px;
     }
 
     &.primary {

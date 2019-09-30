@@ -145,7 +145,7 @@ const WorkHistory = ({ histories }) => (
     </SectionWrapper>
 );
 
-const Preview = React.memo((props) => {
+const Preview = (props) => {
     const columns = '1fr 2fr';
     const rows = '300px 5fr';
     const { resume: { sections } } = props;
@@ -171,7 +171,7 @@ const Preview = React.memo((props) => {
                 <Box direction="vertical" valign="middle" background="#fdf6eb">
                     <ProfileSummry {...profileSummary} />
                 </Box>
-                <Box direction="vertical" valign="middle" halign="left" background="#fbedd5">
+                <Box direction="vertical" valign="top" halign="left" background="#fbedd5">
                     <Skill {...skill} />
                     <Education {...education} />
                     <Certification {...certification} />
@@ -185,7 +185,7 @@ const Preview = React.memo((props) => {
             </Grid>
         </Container>
     );
-});
+};
 
 function Previewer({ resume, loading }) {
     return (
