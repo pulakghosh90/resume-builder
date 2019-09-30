@@ -13,6 +13,7 @@
     "cuid": "2.1.6",
     "emotion-theming": "10.0.14",
     "history": "4.10.1",
+    "immutable": "4.0.0-rc.12",
     "lodash": "4.17.14",
     "prop-types": "15.7.2",
     "react": "16.8.6",

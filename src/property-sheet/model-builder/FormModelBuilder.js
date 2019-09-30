@@ -1,3 +1,4 @@
+import { OrderedMap } from 'immutable';
 
 export function FieldModelBuilder(opts) {
     const model = Object.assign({ errors: [] }, opts);
@@ -33,18 +34,14 @@ export function FieldModelBuilder(opts) {
 }
 
 export default function FormModelBuilder(opts = {}) {
-    const model = Object.assign({ fields: new Map() }, opts);
+    const model = Object.assign({ fields: OrderedMap() }, opts);
     return {
         action(action) {
             model.action = action;
             return this;
         },
         fields(fields) {
-            fields.reduce((result, field) => {
-                const fModel = FieldModelBuilder(field).build();
-                result.set(fModel.id, fModel);
-                return result;
-            }, model.fields);
+            model.fields = OrderedMap(fields.map((field) => [field.id, field]));
             return this;
         },
         heading(heading) {
@@ -52,7 +49,7 @@ export default function FormModelBuilder(opts = {}) {
             return this;
         },
         sectionHeader(id, title) {
-            model.fields.set(id, { section: true, id, title, visibility: true });
+            model.fields = model.fields.set(id, { section: true, id, title, visibility: true });
             return this;
         },
         build() {
