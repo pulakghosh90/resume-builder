@@ -1,9 +1,11 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import styled from '@emotion/styled';
 import { ClassNames } from '@emotion/core';
 import PropTypes from 'prop-types';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import IconButton from '../button/IconButton';
+import StringElement from '../input-elements/StringElement';
+import Button from '../button/Button';
 
 const StyledBadge = styled('div')`
     display: inline-block;
@@ -98,4 +100,65 @@ Badge.propTypes = {
     pill: PropTypes.bool,
     onDelete: PropTypes.func,
     deletable: PropTypes.bool
+};
+
+const Pills = styled('div')`
+    margin-top: 8px;
+`;
+
+const Flex = styled('div')`
+    display: inline-flex;
+    align-items: middle;
+    width: 100%;
+`;
+
+export function BadgeInput(props) {
+    const {
+        id,
+        value,
+        onChange,
+        placeHolder
+    } = props;
+    const [badge, setBadge] = useState('');
+    return (
+        <div>
+            <Flex>
+                <StringElement
+                    id="badge-input"
+                    placeHolder={placeHolder}
+                    value={badge}
+                    onChange={({ value: sk }) => setBadge(sk)}
+                />
+                <Button
+                    appeareance="primary"
+                    text="Add"
+                    onClick={() => {
+                        onChange({ id, value: [...value, badge] });
+                        setBadge('');
+                    }}
+                />
+            </Flex>
+            <Pills>
+                {
+                    value.map((v) => (
+                        <Badge
+                            key={v}
+                            text={v}
+                            appearence="light"
+                            pill
+                            deletable
+                            onDelete={() => onChange({ id, value: value.filter((x) => x !== v) })}
+                        />
+                    ))
+                }
+            </Pills>
+        </div>
+    );
+}
+
+BadgeInput.propTypes = {
+    id: PropTypes.string.isRequired,
+    value: PropTypes.arrayOf(PropTypes.string).isRequired,
+    onChange: PropTypes.func.isRequired,
+    placeHolder: PropTypes.string.isRequired
 };

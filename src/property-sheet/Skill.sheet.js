@@ -7,12 +7,13 @@ const getFieldDefs = () => ([
     {
         id: 'skills',
         label: 'Skills',
-        controlType: 'Skill',
+        controlType: 'Badge',
         value: [],
         visibility: true,
         readOnly: false,
         required: false,
-        errors: []
+        errors: [],
+        placeHolder: 'type skill to add'
     }
 ]);
 

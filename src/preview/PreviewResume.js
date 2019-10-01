@@ -122,10 +122,10 @@ const Interest = ({ interests }) => (
     </SectionWrapper>
 );
 
-const Language = ({ languages }) => (
+const Language = ({ language }) => (
     <SectionWrapper>
         <h3>Languages</h3>
-        <List value={languages} />
+        <List value={language} />
     </SectionWrapper>
 );
 

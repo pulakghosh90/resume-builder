@@ -173,7 +173,7 @@ export const sections = [
         id: cuid(),
         label: 'Language',
         sectionType: 'language',
-        languages: ['Bengali', 'English']
+        language: ['Bengali', 'English']
     }
 ];
 

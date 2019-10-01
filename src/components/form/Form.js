@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
@@ -10,17 +9,17 @@ import RadioGroupElement from '../input-elements/RadioElement';
 import SelectElement from '../input-elements/SelectElement';
 import Icon from '../icon/Icon';
 import WorkHistory from '../resume-section/WorkHistory';
-import Skill from '../resume-section/Skill';
+import { BadgeInput } from '../badge/Badge';
 
 const ControlComponents = {
     String: StringElement,
     Checkbox: CheckboxElement,
-    Raddio: RadioGroupElement,
+    Radio: RadioGroupElement,
     Choice: SelectElement,
     // TODO: implement specific control
     Date: StringElement,
     WorkHistory,
-    Skill
+    Badge: BadgeInput
 };
 
 const StyledLabel = styled('label')`
