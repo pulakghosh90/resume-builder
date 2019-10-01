@@ -7,17 +7,19 @@ const getFieldDefs = () => ([
     {
         id: 'skills',
         label: 'Skills',
-        controlType: 'Skill',
+        controlType: 'Badge',
         value: [],
         visibility: true,
         readOnly: false,
         required: false,
-        errors: []
+        errors: [],
+        placeHolder: 'type skill to add'
     }
 ]);
 
 export const sheet = FormModelBuilder()
     .action('UpdateProperty')
+    .heading('Skills')
     .fields(getFieldDefs())
     .build();
 

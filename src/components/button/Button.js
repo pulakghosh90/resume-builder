@@ -14,7 +14,7 @@ const StyledButton = styled('button')`
     cursor: pointer;
     background-image: none;
     border: 1px solid transparent;
-    padding: 6px 12px;
+    padding: 6px 9px;
     font-size: 14px;
     line-height: 1.42857143;
     border-radius: 4px;

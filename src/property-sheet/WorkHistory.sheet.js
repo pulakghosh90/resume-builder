@@ -101,6 +101,7 @@ const getEditFormFieldDefs = () => ([
 
 export const sheet = FormModelBuilder()
     .action('UpdateProperty')
+    .heading('Work Histories')
     .fields(getFieldDefs())
     .build();
 

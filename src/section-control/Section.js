@@ -8,11 +8,10 @@ const Container = styled('div')`
     grid-area: lt;
     height: 100%;
     width: 100%;
-    padding-left: 10px;
 `;
 
 const Group = styled('div')`
-    border-bottom: solid #f7f7f9;
+    border-bottom: 3px solid rgb(230,232,234);
     padding: 0px 0px 8px 0px;
     margin: 0px 0px 16px 0px;
 `;

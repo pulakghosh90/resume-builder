@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
@@ -10,17 +9,17 @@ import RadioGroupElement from '../input-elements/RadioElement';
 import SelectElement from '../input-elements/SelectElement';
 import Icon from '../icon/Icon';
 import WorkHistory from '../resume-section/WorkHistory';
-import Skill from '../resume-section/Skill';
+import { BadgeInput } from '../badge/Badge';
 
 const ControlComponents = {
     String: StringElement,
     Checkbox: CheckboxElement,
-    Raddio: RadioGroupElement,
+    Radio: RadioGroupElement,
     Choice: SelectElement,
     // TODO: implement specific control
     Date: StringElement,
     WorkHistory,
-    Skill
+    Badge: BadgeInput
 };
 
 const StyledLabel = styled('label')`
@@ -81,21 +80,11 @@ const SectionContainer = styled('div')`
     font-size: 16px;
     line-height: 1.25;
     font-weight: 400;
-    margin-bottom: 5px;
-`;
-
-const HeadingContainer = styled('div')`
-    font-size: 26px;
-    color: #277fd9;
-    line-height: 1.5;
-    margin-bottom: 5px;
-    font-weight: 300;
+    margin: 5px 10px;
 `;
 
 const Section = ({ title, visibility }) => (visibility ? <SectionContainer>{title}</SectionContainer> : null);
-const Heading = ({ title, visibility }) => (visibility ? <HeadingContainer>{title}</HeadingContainer> : null);
 const isSection = ({ section }) => section === true;
-const isHeading = ({ heading }) => heading === true;
 const preventSubmit = (e) => e.preventDefault();
 
 export default function Form({ model, onChange }) {
@@ -104,14 +93,13 @@ export default function Form({ model, onChange }) {
         <form onSubmit={preventSubmit}>
             {
                 fields.map((field) => (
-                    isHeading(field) ? <Heading key={field.id} {...field} />
-                        : isSection(field)
-                            ? <Section key={field.id} {...field} />
-                            : (
-                                <FormGroup key={field.id}>
-                                    <FormControl key={field.id} field={field} onChange={onChange} />
-                                </FormGroup>
-                            )
+                    isSection(field)
+                        ? <Section key={field.id} {...field} />
+                        : (
+                            <FormGroup key={field.id}>
+                                <FormControl key={field.id} field={field} onChange={onChange} />
+                            </FormGroup>
+                        )
                 ))
             }
         </form>
