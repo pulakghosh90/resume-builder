@@ -10,7 +10,6 @@ import Button from '../components/button/Button';
 import { Action } from './Builder';
 
 const CustomGrid = styled(Grid)`
-    border: solid #f7f7f9;
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: minmax(50px, auto);
     grid-template-areas:

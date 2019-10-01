@@ -8,12 +8,10 @@ import StringElement from '../input-elements/StringElement';
 import Button from '../button/Button';
 
 const StyledBadge = styled('div')`
-    display: inline-block;
+    display: inline-flex;
+    align-items: flex-end;
     padding: 0.25em 0.4em;
-    line-height: 1;
-    text-align: center;
     white-space: nowrap;
-    vertical-align: baseline;
     border-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     margin-top: 5px;
@@ -24,6 +22,7 @@ const StyledBadge = styled('div')`
         border-radius: 10rem;
         margin-left: 5px;
         margin-right: 5px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
 
     &.primary {
@@ -108,7 +107,6 @@ const Pills = styled('div')`
 
 const Flex = styled('div')`
     display: inline-flex;
-    align-items: middle;
     width: 100%;
 `;
 
@@ -121,13 +119,13 @@ export function BadgeInput(props) {
     } = props;
     const [badge, setBadge] = useState('');
     return (
-        <div>
+        <Fragment>
             <Flex>
                 <StringElement
                     id="badge-input"
                     placeHolder={placeHolder}
                     value={badge}
-                    onChange={({ value: sk }) => setBadge(sk)}
+                    onChange={({ value: bdg }) => setBadge(bdg)}
                 />
                 <Button
                     appeareance="primary"
@@ -152,7 +150,7 @@ export function BadgeInput(props) {
                     ))
                 }
             </Pills>
-        </div>
+        </Fragment>
     );
 }
 
