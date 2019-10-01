@@ -8,13 +8,24 @@ const Container = styled('div')`
     grid-area: rt;
     height: 100%;
     width: 100%;
-    overflow: auto;
 `;
 
-const NoSelection = styled('div')`
-    grid-area: rt;
-    height: 100%;
-    width: 100%;
+const Title = styled('h2')`
+    background-color: rgb(250, 250, 250);
+    line-height: 32px;
+    font-size: 16px;
+    margin: 0px;
+    padding: 0px 5px;
+    color: rgb(115, 115, 115);
+    border: 1px solid rgb(240, 242, 243);
+`;
+
+const Para = styled('p')`
+    width: 75%;
+    margin: 35px auto;
+    color: rgb(115, 115, 115);
+    font-weight: 400;
+    font-size: 14px;
 `;
 
 class PropertySheet extends React.Component {
@@ -38,9 +49,7 @@ class PropertySheet extends React.Component {
     render() {
         const { model } = this.props;
         return (
-            <Container>
-                <Form model={model} onChange={this.onChange} />
-            </Container>
+            <Form model={model} onChange={this.onChange} />
         );
     }
 }
@@ -48,11 +57,17 @@ class PropertySheet extends React.Component {
 const Properties = ({ selection, dispatch }) => (
     selection.fold({
         Nothing: () => (
-            <NoSelection>
-                <h1>Please select section to update</h1>
-            </NoSelection>
+            <Container>
+                <Title>Please select section to update</Title>
+                <Para>Please select an item from the canvas to view its properties</Para>
+            </Container>
         ),
-        Just: ({ sheet }) => (<PropertySheet model={sheet} dispatch={dispatch} />)
+        Just: ({ sheet }) => (
+            <Container>
+                <Title>{sheet.heading}</Title>
+                <PropertySheet model={sheet} dispatch={dispatch} />
+            </Container>
+        )
     })
 );
 

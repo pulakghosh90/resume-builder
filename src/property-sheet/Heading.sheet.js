@@ -68,7 +68,7 @@ const getFieldDefs = () => ([
         id: 'country',
         label: 'Country',
         controlType: 'Choice',
-        value: '',
+        value: 'india',
         visibility: true,
         readOnly: false,
         required: true,
@@ -112,7 +112,7 @@ const getFieldDefs = () => ([
 
 export const sheet = FormModelBuilder()
     .action('UpdateProperty')
-    .heading('heading', 'Resume Heading')
+    .heading('Heading')
     .sectionHeader('sub-heading', 'We suggest including an email and phone number.')
     .fields(getFieldDefs())
     .build();

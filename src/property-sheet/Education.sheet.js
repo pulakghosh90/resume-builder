@@ -17,6 +17,7 @@ const getFieldDefs = () => ([
 
 export const sheet = FormModelBuilder()
     .action('UpdateProperty')
+    .heading('Educations')
     .fields(getFieldDefs())
     .build();
 

@@ -18,6 +18,7 @@ const getFieldDefs = () => ([
 
 export const sheet = FormModelBuilder()
     .action('UpdateProperty')
+    .heading('Skills')
     .fields(getFieldDefs())
     .build();
 

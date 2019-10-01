@@ -8,8 +8,8 @@ import List from '../components/list/List';
 
 const Container = styled('div')`
     grid-area: main;
-    border-left: 1px solid grey;
-    border-right: 1px solid grey;
+    border-left: 3px solid rgb(230, 232, 234);
+    border-right: 3px solid rgb(230, 232, 234);
     height: 100%;
     width: 100%;
     padding: 10px;

@@ -26,6 +26,7 @@ const getFieldDefs = () => ([
 
 export const sheet = FormModelBuilder()
     .action('UpdateProperty')
+    .heading('New Section')
     .fields(getFieldDefs())
     .build();
 
