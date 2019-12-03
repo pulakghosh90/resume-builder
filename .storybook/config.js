@@ -1,8 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
-import { configure, addDecorator } from '@storybook/react';
+import { configure, addDecorator, addParameters } from '@storybook/react';
 import { checkA11y } from '@storybook/addon-a11y';
-import { withOptions } from '@storybook/addon-options';
 import { ThemeProvider } from 'emotion-theming';
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -10,8 +9,6 @@ import theme from '../src/theme/Theme';
 import GlobalStyles from '../src/util/GlobalStyles';
 import { Provider } from 'react-redux';
 import create from '../src/store/AppStore';
-
-withOptions({ addonPanelInRight: true });
 
 const componentStoriesReq = require.context('../src', true, /.stories.js$/);
 
@@ -34,4 +31,11 @@ addDecorator((story) => {
     return story();
 })
 addDecorator(checkA11y);
+
+addParameters({
+    options: {
+        panelPosition: 'right'
+    }
+});
+
 configure(loadStories, module);
