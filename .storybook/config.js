@@ -32,10 +32,6 @@ addDecorator((story) => {
 })
 addDecorator(checkA11y);
 
-addParameters({
-    options: {
-        panelPosition: 'right'
-    }
-});
+
 
 configure(loadStories, module);
