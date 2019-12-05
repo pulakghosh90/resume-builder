@@ -35,7 +35,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006",
     "dev": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook"
+    "build-storybook": "./node_modules/.bin/build-storybook"
   },
   "eslintConfig": {
     "extends": "react-app"

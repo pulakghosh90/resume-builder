@@ -12,4 +12,4 @@ jobs:
 
     steps:
       - checkout
-      - run: npm run build-storybook
+      - run: npm build-storybook
