@@ -1,26 +1,22 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable prefer-destructuring */
 import FormModelBuilder from './FormModelBuilder';
 
 export default function SheetMutation(sheet = {}) {
     const newSheet = FormModelBuilder(sheet).build();
     return {
         loadValues(values) {
-            const fields = newSheet.fields;
-            for (const key in values) {
-                if (fields.has(key)) {
-                    const newField = Object.assign({}, fields.get(key));
-                    newField.value = values[key];
-                    fields.set(key, newField);
+            newSheet.fields = newSheet.fields.map((field, id) => {
+                if (values[id]) {
+                    return Object.assign({}, field, { value: values[id] });
                 }
-            }
+                return field;
+            });
             return this;
         },
         setFieldProps(id, props, value) {
             const { fields } = newSheet;
             const newField = Object.assign({}, fields.get(id));
             newField[props] = value;
-            fields.set(id, newField);
+            newSheet.fields = fields.set(id, newField);
             return this;
         },
         setValue(id, value) {
